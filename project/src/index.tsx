@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components/app/app';
+import { favorites, mockOffers } from './moks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const AVAILABLE_PLACES_NUMBER = 987;
-
 root.render(
   <React.StrictMode>
     <App
-      placesNumber={AVAILABLE_PLACES_NUMBER}
+      offers={mockOffers}
+      favorites={favorites}
     />
   </React.StrictMode>,
 );
