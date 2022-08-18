@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
-import { CardSection } from '../../components/place-card/place-card';
 import { mockOffers } from '../../moks/offers';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
+import { CardSection } from '../../types/types';
 
 
 export const PropertyPage = (): JSX.Element => {

@@ -1,6 +1,7 @@
-import { Favorite, FavoriteList } from '../../components/favorite-list/favorite-list';
+import { FavoriteList } from '../../components/favorite-list/favorite-list';
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { Favorite } from '../../types/types';
 
 type FavoritesPageProps = {
   favorites: Favorite[];

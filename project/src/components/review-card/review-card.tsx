@@ -1,11 +1,4 @@
-export type Review = {
-  id: number;
-  userName: string;
-  rating: number;
-  text: string;
-  dateTime: string;
-  formattedDate: string;
-}
+import { Review } from '../../types/types';
 
 export const ReviewCard = ({
   id,

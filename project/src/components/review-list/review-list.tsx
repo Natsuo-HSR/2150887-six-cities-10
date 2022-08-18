@@ -1,4 +1,5 @@
-import { Review, ReviewCard } from '../review-card/review-card';
+import { Review } from '../../types/types';
+import { ReviewCard } from '../review-card/review-card';
 
 type ReviewListProps = {
   reviews: Review[];

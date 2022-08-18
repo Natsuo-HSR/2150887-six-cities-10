@@ -6,8 +6,7 @@ import { NotFoundPage } from '../../pages/not-fount-page/not-found-page';
 import { PropertyPage } from '../../pages/property-page/property-page';
 import { AppRoutes } from '../../constants/routes';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { Place } from '../place-card/place-card';
-import { Favorite } from '../favorite-list/favorite-list';
+import { Favorite, Place } from '../../types/types';
 
 type AppProps = {
   offers: Place[];
