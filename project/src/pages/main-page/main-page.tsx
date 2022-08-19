@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import { Header } from '../../components/header/header';
+import { Map } from '../../components/map/map';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
-import { CardSection, Place } from '../../components/place-card/place-card';
+import { amsterdam } from '../../moks/map-points';
+import { CardSection, Place } from '../../types/types';
 
 export type MainPageProps = {
   offers: Place[];
 }
 
 export const MainPage = ({offers} : MainPageProps): JSX.Element => {
+  const [selectedCard, setSelectedCard] = useState<null | Place>(null);
+  const selectCard = (offer: Place) => setSelectedCard(offer);
+
   const mainMockOffers = offers.slice(0, 4);
 
   return (
@@ -82,10 +88,10 @@ export const MainPage = ({offers} : MainPageProps): JSX.Element => {
                   </li>
                 </ul>
               </form>
-              <PlaceCardList section={CardSection.Main} offers={mainMockOffers} />
+              <PlaceCardList section={CardSection.Main} offers={mainMockOffers} onMouseOver={selectCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
             </div>
           </div>
         </div>

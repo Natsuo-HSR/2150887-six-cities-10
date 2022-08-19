@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { PlaceCard, Place, CardSection } from '../place-card/place-card';
-
-export type Favorite = {
-  id: number,
-  city: string,
-  offers: Place[];
-}
+import { CardSection, Favorite, Place } from '../../types/types';
+import { PlaceCard } from '../place-card/place-card';
 
 type FavoriteListProps = {
   favorites: Favorite[]

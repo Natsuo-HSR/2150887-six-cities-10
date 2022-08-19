@@ -1,5 +1,4 @@
-import { Favorite } from '../components/favorite-list/favorite-list';
-import { Place } from './../components/place-card/place-card';
+import { Favorite, Place } from '../types/types';
 
 export const mockOffers: Place[] = [
   // main
@@ -10,7 +9,13 @@ export const mockOffers: Place[] = [
     price: 120,
     rating: 4,
     description: 'Beautiful & luxurious apartment at great location',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 1',
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 15
+    }
   },
   {
     id: 2,
@@ -19,7 +24,13 @@ export const mockOffers: Place[] = [
     price: 80,
     rating: 4,
     description: 'Wood and stone place',
-    type: 'Private room'
+    type: 'Private room',
+    location: {
+      title: 'Apartment 2',
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
+      zoom: 15
+    }
   },
   {
     id: 3,
@@ -27,7 +38,13 @@ export const mockOffers: Place[] = [
     price: 132,
     rating: 4,
     description: 'Canal View Prinsengracht',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 3',
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 15
+    }
   },
   {
     id: 4,
@@ -37,7 +54,13 @@ export const mockOffers: Place[] = [
     price: 180,
     rating: 5,
     description: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 4',
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   // favorites
   {
@@ -48,7 +71,13 @@ export const mockOffers: Place[] = [
     price: 180,
     rating: 5,
     description: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 5',
+      latitude: 52.3809553943608,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   {
     id: 6,
@@ -57,7 +86,13 @@ export const mockOffers: Place[] = [
     price: 80,
     rating: 4,
     description: 'Wood and stone place',
-    type: 'Private room'
+    type: 'Private room',
+    location: {
+      title: 'Apartment 6',
+      latitude: 52.3809553943708,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   {
     id: 7,
@@ -66,7 +101,13 @@ export const mockOffers: Place[] = [
     price: 180,
     rating: 5,
     description: 'White castle',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 7',
+      latitude: 52.3809553943808,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   // nearest
   {
@@ -76,7 +117,13 @@ export const mockOffers: Place[] = [
     price: 80,
     rating: 4,
     description: 'Wood and stone place',
-    type: 'Private room'
+    type: 'Private room',
+    location: {
+      title: 'Apartment 8',
+      latitude: 52.3809553943908,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   {
     id: 9,
@@ -85,7 +132,13 @@ export const mockOffers: Place[] = [
     price: 132,
     rating: 4,
     description: 'Canal View Prinsengracht',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 9',
+      latitude: 52.3809553943128,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
   {
     id: 10,
@@ -94,7 +147,13 @@ export const mockOffers: Place[] = [
     price: 180,
     rating: 5,
     description: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment'
+    type: 'Apartment',
+    location: {
+      title: 'Apartment 10',
+      latitude: 52.3809553941308,
+      longitude: 4.939309666406198,
+      zoom: 15
+    }
   },
 ];
 

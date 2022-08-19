@@ -1,21 +1,19 @@
-import { useState } from 'react';
-import { PlaceCard, Place, CardSection } from '../place-card/place-card';
+import { CardSection, Place } from '../../types/types';
+import { PlaceCard } from '../place-card/place-card';
 
 type PlaceCardListProps = {
   section: CardSection;
   offers: Place[];
+  onMouseOver?: (place: Place) => void;
 }
 
-export const PlaceCardList = ({ offers, section }: PlaceCardListProps): JSX.Element => {
-  const [, setActiveCard] = useState<null | Place>(null);
-  const makeCardActive = (offer: Place) => setActiveCard(offer);
-
+export const PlaceCardList = ({ offers, section, onMouseOver }: PlaceCardListProps): JSX.Element => {
   // prepare styles
   const sectionStyle = getSectionStyle(section);
 
   return (
     <div className={sectionStyle}>
-      { offers.map((offer) => <PlaceCard section={section} key={offer.id} place={offer} onMouseOver={makeCardActive} />) }
+      { offers.map((offer) => <PlaceCard section={section} key={offer.id} place={offer} onMouseOver={onMouseOver ? onMouseOver : undefined} />) }
     </div>
   );
 };

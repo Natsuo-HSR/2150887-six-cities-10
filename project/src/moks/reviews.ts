@@ -1,4 +1,4 @@
-import { Review } from './../components/review-card/review-card';
+import { Review } from '../types/types';
 
 export const mockReviews: Review[] = [
   {

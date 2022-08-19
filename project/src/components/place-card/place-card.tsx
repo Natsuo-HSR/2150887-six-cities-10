@@ -1,26 +1,10 @@
 import { Link } from 'react-router-dom';
-
-export enum CardSection {
-  Main = 'cities',
-  Favorites = 'favorites',
-  Nearest = 'near',
-}
-
-export type Place = {
-  id: number;
-  mark?: string;
-  imageSource: string;
-  bookmarked?: boolean;
-  price: number;
-  rating: number;
-  description: string;
-  type: string;
-}
+import { CardSection, Place } from '../../types/types';
 
 type PlaceCardProps = {
   section: CardSection;
   place: Place;
-  onMouseOver: (place: Place) => void;
+  onMouseOver?: (place: Place) => void;
 }
 
 export const PlaceCard = ({
@@ -35,7 +19,7 @@ export const PlaceCard = ({
   const sectionStyle = getSectionStyle(section);
 
   return (
-    <article className={`${sectionStyle}__card place-card`} onMouseOver={() => onMouseOver(place)}>
+    <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(place) : undefined}>
       {
         mark ?
           <div className="place-card__mark">
