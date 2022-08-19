@@ -1,3 +1,4 @@
+import { badReviews, defaultReview, greatReviews, detailedReviews, shortReviews } from './reviews';
 import { Favorite, Place } from '../types/types';
 
 export const mockOffers: Place[] = [
@@ -7,7 +8,7 @@ export const mockOffers: Place[] = [
     mark: 'Premium',
     imageSource: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 2,
     description: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     location: {
@@ -15,7 +16,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
       zoom: 15
-    }
+    },
+    reviews: badReviews
   },
   {
     id: 2,
@@ -30,7 +32,8 @@ export const mockOffers: Place[] = [
       latitude: 52.369553943508,
       longitude: 4.85309666406198,
       zoom: 15
-    }
+    },
+    reviews: greatReviews
   },
   {
     id: 3,
@@ -44,7 +47,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
       zoom: 15
-    }
+    },
+    reviews: detailedReviews
   },
   {
     id: 4,
@@ -60,7 +64,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
       zoom: 15
-    }
+    },
+    reviews: shortReviews
   },
   // favorites
   {
@@ -77,7 +82,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3809553943608,
       longitude: 4.939309666406198,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
   {
     id: 6,
@@ -92,7 +98,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3809553943708,
       longitude: 4.939309666406198,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
   {
     id: 7,
@@ -107,7 +114,8 @@ export const mockOffers: Place[] = [
       latitude: 52.3809553943808,
       longitude: 4.939309666406198,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
   // nearest
   {
@@ -120,10 +128,11 @@ export const mockOffers: Place[] = [
     type: 'Private room',
     location: {
       title: 'Apartment 8',
-      latitude: 52.3809553943908,
-      longitude: 4.939309666406198,
+      latitude: 35.6125002,
+      longitude: 139.678236,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
   {
     id: 9,
@@ -135,10 +144,11 @@ export const mockOffers: Place[] = [
     type: 'Apartment',
     location: {
       title: 'Apartment 9',
-      latitude: 52.3809553943128,
-      longitude: 4.939309666406198,
+      latitude: 35.6655645,
+      longitude: 139.645524,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
   {
     id: 10,
@@ -150,10 +160,11 @@ export const mockOffers: Place[] = [
     type: 'Apartment',
     location: {
       title: 'Apartment 10',
-      latitude: 52.3809553941308,
-      longitude: 4.939309666406198,
+      latitude: 35.6965261,
+      longitude: 139.623123,
       zoom: 15
-    }
+    },
+    reviews: defaultReview
   },
 ];
 

@@ -14,6 +14,7 @@ export type Place = {
   description: string;
   type: string;
   location: MapPoint;
+  reviews: Review[];
 }
 
 export type Favorite = {
@@ -44,3 +45,9 @@ export type MapPoint = {
   longitude: number;
   zoom: number;
 }
+
+export type MapProps = {
+  city: City;
+  places: Place[];
+  selectedPlace: Place | null;
+};

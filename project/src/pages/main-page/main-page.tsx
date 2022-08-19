@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Header } from '../../components/header/header';
-import { Map } from '../../components/map/map';
+import { MainMap } from '../../components/map/proxies/main-map';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
 import { amsterdam } from '../../moks/map-points';
 import { CardSection, Place } from '../../types/types';
@@ -91,7 +91,7 @@ export const MainPage = ({offers} : MainPageProps): JSX.Element => {
               <PlaceCardList section={CardSection.Main} offers={mainMockOffers} onMouseOver={selectCard} />
             </section>
             <div className="cities__right-section">
-              <Map city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
+              <MainMap city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
             </div>
           </div>
         </div>
