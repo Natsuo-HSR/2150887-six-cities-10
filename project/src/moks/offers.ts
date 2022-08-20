@@ -1,4 +1,4 @@
-import { badReviews, defaultReview, greatReviews, detailedReviews, shortReviews } from './reviews';
+import { generalReviews, defaultReview, detailedReviews, shortReviews } from './reviews';
 import { Favorite, Place } from '../types/types';
 
 export const mockOffers: Place[] = [
@@ -17,7 +17,7 @@ export const mockOffers: Place[] = [
       longitude: 4.85309666406198,
       zoom: 15
     },
-    reviews: badReviews
+    reviews: generalReviews
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ export const mockOffers: Place[] = [
       longitude: 4.85309666406198,
       zoom: 15
     },
-    reviews: greatReviews
+    reviews: generalReviews
   },
   {
     id: 3,

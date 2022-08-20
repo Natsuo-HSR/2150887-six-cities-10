@@ -1,8 +1,8 @@
-import { CardSection, Place } from '../../types/types';
+import { AppSection, Place } from '../../types/types';
 import { PlaceCard } from '../place-card/place-card';
 
 type PlaceCardListProps = {
-  section: CardSection;
+  section: AppSection;
   offers: Place[];
   onMouseOver?: (place: Place) => void;
 }
@@ -18,16 +18,16 @@ export const PlaceCardList = ({ offers, section, onMouseOver }: PlaceCardListPro
   );
 };
 
-const getSectionStyle = (section: CardSection): string => {
+const getSectionStyle = (section: AppSection): string | undefined => {
   let sectionStyle;
   switch(section) {
-    case CardSection.Main:
+    case AppSection.Main:
       sectionStyle = 'cities__places-list places__list tabs__content';
       break;
-    case CardSection.Favorites:
+    case AppSection.Favorites:
       sectionStyle = 'favorites__list';
       break;
-    case CardSection.Nearest:
+    case AppSection.Nearest:
       sectionStyle = 'near-places__list places__list';
       break;
   }

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { CardSection, Place } from '../../types/types';
+import { AppSection, Place } from '../../types/types';
 
 type PlaceCardProps = {
-  section: CardSection;
+  section: AppSection;
   place: Place;
   onMouseOver?: (place: Place) => void;
 }
@@ -61,38 +61,38 @@ export const PlaceCard = ({
   );
 };
 
-const getSectionStyle = (section: CardSection): string => {
+const getSectionStyle = (section: AppSection): string => {
   let sectionStyles = '';
   switch(section) {
-    case CardSection.Main:
+    case AppSection.Main:
       sectionStyles = 'cities';
       break;
-    case CardSection.Favorites:
+    case AppSection.Favorites:
       sectionStyles = 'favorites';
       break;
-    case CardSection.Nearest:
+    case AppSection.Nearest:
       sectionStyles = 'near-places';
       break;
   }
   return sectionStyles;
 };
 
-const getImageSizes = (section: CardSection) => {
+const getImageSizes = (section: AppSection) => {
   let imageSizes;
   switch(section) {
-    case CardSection.Main:
+    case AppSection.Main:
       imageSizes = {
         width: '260',
         height: '200',
       };
       break;
-    case CardSection.Favorites:
+    case AppSection.Favorites:
       imageSizes = {
         width: '150',
         height: '110',
       };
       break;
-    case CardSection.Nearest:
+    case AppSection.Nearest:
       imageSizes = {
         width: '260',
         height: '200',

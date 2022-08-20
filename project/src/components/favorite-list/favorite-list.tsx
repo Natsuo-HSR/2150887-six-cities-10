@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardSection, Favorite, Place } from '../../types/types';
+import { AppSection, Favorite, Place } from '../../types/types';
 import { PlaceCard } from '../place-card/place-card';
 
 type FavoriteListProps = {
@@ -24,7 +24,7 @@ export const FavoriteList = ({ favorites }: FavoriteListProps): JSX.Element => {
           </div>
 
           <div className="favorites__places">
-            {favorite.offers.map((offer) => <PlaceCard section={CardSection.Favorites} key={offer.id} place={offer} onMouseOver={makeCardActive} />)}
+            {favorite.offers.map((offer) => <PlaceCard section={AppSection.Favorites} key={offer.id} place={offer} onMouseOver={makeCardActive} />)}
           </div>
         </li>
       ))}

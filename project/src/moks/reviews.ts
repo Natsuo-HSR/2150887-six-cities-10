@@ -1,6 +1,6 @@
 import { Review } from '../types/types';
 
-export const badReviews: Review[] = [
+export const generalReviews: Review[] = [
   {
     id: 1,
     userName: 'Max',
@@ -25,11 +25,8 @@ export const badReviews: Review[] = [
     dateTime: '2019-07-07',
     formattedDate: 'July 2019'
   },
-];
-
-export const greatReviews: Review[] = [
   {
-    id: 1,
+    id: 4,
     userName: 'Chase',
     rating: 5,
     text: 'Excellent',
@@ -37,7 +34,7 @@ export const greatReviews: Review[] = [
     formattedDate: 'April 2019'
   },
   {
-    id: 2,
+    id: 5,
     userName: 'Eric',
     rating: 5,
     text: 'Wonderfull place',

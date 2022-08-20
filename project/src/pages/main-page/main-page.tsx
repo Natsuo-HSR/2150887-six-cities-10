@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Header } from '../../components/header/header';
-import { MainMap } from '../../components/map/proxies/main-map';
+import { Map } from '../../components/map/map';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
 import { amsterdam } from '../../moks/map-points';
-import { CardSection, Place } from '../../types/types';
+import { AppSection, Place } from '../../types/types';
 
 export type MainPageProps = {
   offers: Place[];
@@ -88,10 +88,10 @@ export const MainPage = ({offers} : MainPageProps): JSX.Element => {
                   </li>
                 </ul>
               </form>
-              <PlaceCardList section={CardSection.Main} offers={mainMockOffers} onMouseOver={selectCard} />
+              <PlaceCardList section={AppSection.Main} offers={mainMockOffers} onMouseOver={selectCard} />
             </section>
             <div className="cities__right-section">
-              <MainMap city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
+              <Map section={AppSection.Main} city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
             </div>
           </div>
         </div>
