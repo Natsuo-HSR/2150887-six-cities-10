@@ -1,25 +1,22 @@
 import { useParams } from 'react-router-dom';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
-import { mockOffers } from '../../moks/offers';
+import { mockPlaces } from '../../mocks/places';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
 import { AppSection } from '../../types/types';
 import { Map } from '../../components/map/map';
-import { tokyo } from '../../moks/map-points';
 import { Header } from '../../components/header/header';
 
 
 export const PropertyPage = (): JSX.Element => {
   const urlParams = useParams();
-  const property = mockOffers.find(({id}) => id === Number(urlParams.id));
+  const property = mockPlaces.find(({id}) => id === Number(urlParams.id));
 
   if (!property) {
     return <NotFoundPage />;
   }
 
   const { mark, imageSource, price, rating, description, type } = property;
-
-  const nearestMockOffers = mockOffers.slice(7, 10);
 
   return (
     <>
@@ -149,12 +146,12 @@ export const PropertyPage = (): JSX.Element => {
               <ReviewSection reviews={property.reviews} />
             </div>
           </div>
-          <Map section={AppSection.Property} city={tokyo} places={nearestMockOffers} />
+          <Map section={AppSection.Property} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardList section={AppSection.Nearest} offers={nearestMockOffers} />
+            <PlaceCardList section={AppSection.Nearest} />
           </section>
         </div>
       </main>

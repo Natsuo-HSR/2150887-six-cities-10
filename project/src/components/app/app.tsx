@@ -6,19 +6,18 @@ import { NotFoundPage } from '../../pages/not-fount-page/not-found-page';
 import { PropertyPage } from '../../pages/property-page/property-page';
 import { AppRoutes } from '../../constants/routes';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { Favorite, Place } from '../../types/types';
+import { Favorite } from '../../types/types';
 
 type AppProps = {
-  offers: Place[];
   favorites: Favorite[];
 }
 
-export const App = ({offers, favorites} : AppProps): JSX.Element => (
+export const App = ({ favorites } : AppProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route
         path={AppRoutes.Index}
-        element={<MainPage offers={offers} />}
+        element={<MainPage />}
       />
       <Route
         path={AppRoutes.Login}
