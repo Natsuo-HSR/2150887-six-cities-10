@@ -1,9 +1,10 @@
-import { CSSProperties, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import { MapProps } from '../../types/types';
+import { AppSection, Place } from '../../types/types';
 import { URL_MARKER_DEFAULT, URL_MARKER_SELECTED } from '../../constants/markers';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../../hooks/useAppDispatch';
 
 const defaultIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -17,12 +18,16 @@ const selectedIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-type MapOwnProps = MapProps & {
-  className: string;
-  style?: CSSProperties;
-}
 
-export const Map = ({ className, style, city, places, selectedPlace }: MapOwnProps): JSX.Element => {
+type MapProps = {
+  section: AppSection;
+  selectedPlace?: Place | null;
+};
+
+export const Map = ({ section, selectedPlace }: MapProps): JSX.Element => {
+  const city = useAppSelector((state) => state.city);
+  const places = useAppSelector((state) => state.places);
+
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -36,7 +41,7 @@ export const Map = ({ className, style, city, places, selectedPlace }: MapOwnPro
 
         marker
           .setIcon(
-            selectedPlace !== null && place.location.title === selectedPlace.location.title
+            selectedPlace !== null && place.location.title === selectedPlace?.location.title
               ? selectedIcon
               : defaultIcon
           )
@@ -45,5 +50,19 @@ export const Map = ({ className, style, city, places, selectedPlace }: MapOwnPro
     }
   }, [map, places, selectedPlace]);
 
-  return <section className={className} style={style ? style : undefined} ref={mapRef}></section>;
+  let className, style;
+
+  switch(section) {
+    case AppSection.Main:
+      className = 'cities__map map';
+      break;
+    case AppSection.Property:
+      className = 'property__map map';
+      style = {
+        maxWidth: '60%',
+        margin: '0 auto 50px auto',
+      };
+      break;
+  }
+  return <section className={className} style={style} ref={mapRef}></section>;
 };

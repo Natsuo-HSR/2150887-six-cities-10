@@ -1,7 +1,8 @@
-export enum CardSection {
+export enum AppSection {
   Main = 'cities',
   Favorites = 'favorites',
   Nearest = 'near',
+  Property = 'property',
 }
 
 export type Place = {
@@ -13,6 +14,7 @@ export type Place = {
   rating: number;
   description: string;
   type: string;
+  city: string;
   location: MapPoint;
   reviews: Review[];
 }
@@ -33,6 +35,7 @@ export type Review = {
 }
 
 export type City = {
+  id: number;
   title: string;
   latitude: number;
   longitude: number;
@@ -45,9 +48,3 @@ export type MapPoint = {
   longitude: number;
   zoom: number;
 }
-
-export type MapProps = {
-  city: City;
-  places: Place[];
-  selectedPlace: Place | null;
-};

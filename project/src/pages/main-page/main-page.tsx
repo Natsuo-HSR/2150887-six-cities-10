@@ -1,67 +1,30 @@
 import { useState } from 'react';
+import { CityItemList } from '../../components/city-item-list/city-item-list';
 import { Header } from '../../components/header/header';
-import { MainMap } from '../../components/map/proxies/main-map';
+import { Map } from '../../components/map/map';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
-import { amsterdam } from '../../moks/map-points';
-import { CardSection, Place } from '../../types/types';
+import { useAppSelector } from '../../hooks/useAppDispatch';
+import { mockCities } from '../../mocks/cities';
+import { AppSection, Place } from '../../types/types';
 
-export type MainPageProps = {
-  offers: Place[];
-}
-
-export const MainPage = ({offers} : MainPageProps): JSX.Element => {
+export const MainPage = (): JSX.Element => {
   const [selectedCard, setSelectedCard] = useState<null | Place>(null);
   const selectCard = (offer: Place) => setSelectedCard(offer);
 
-  const mainMockOffers = offers.slice(0, 4);
+  const city = useAppSelector((state) => state.city);
+  const cityPlaces = useAppSelector((state) => state.places);
 
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#todo">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#todo">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#todo">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#todo">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#todo">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <CityItemList cities={mockCities} />
 
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cityPlaces.length} places to stay in {city.title}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -88,10 +51,10 @@ export const MainPage = ({offers} : MainPageProps): JSX.Element => {
                   </li>
                 </ul>
               </form>
-              <PlaceCardList section={CardSection.Main} offers={mainMockOffers} onMouseOver={selectCard} />
+              <PlaceCardList section={AppSection.Main} onMouseOver={selectCard} />
             </section>
             <div className="cities__right-section">
-              <MainMap city={amsterdam} places={mainMockOffers} selectedPlace={selectedCard} />
+              <Map section={AppSection.Main} selectedPlace={selectedCard} />
             </div>
           </div>
         </div>
