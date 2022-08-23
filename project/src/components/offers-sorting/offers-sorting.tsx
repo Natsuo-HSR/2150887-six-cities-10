@@ -3,11 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { setSortTypeAction } from '../../store/actions';
 import { SortType } from '../../types/types';
 
-type PlacesSoringType = {
+type OffersSoringType = {
   options: SortType[];
 }
 
-export const PlacesSorting = ({options}: PlacesSoringType): JSX.Element => {
+export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const dispatch = useAppDispatch();
   const sortType = useAppSelector((state) => state.sortType);

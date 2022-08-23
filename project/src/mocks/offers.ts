@@ -1,7 +1,7 @@
-import { Place, Favorite } from '../types/types';
+import { Offer, Favorite } from '../types/types';
 import { defaultReview, detailedReviews } from './reviews';
 
-export const parisOffers: Place[] = [
+export const parisOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
@@ -38,7 +38,7 @@ export const parisOffers: Place[] = [
   },
 ];
 
-export const cologneOffers: Place[] = [
+export const cologneOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
@@ -75,7 +75,7 @@ export const cologneOffers: Place[] = [
   },
 ];
 
-export const brusselsOffers: Place[] = [
+export const brusselsOffers: Offer[] = [
   {
     id: 1,
     imageSource: 'img/apartment-02.jpg',
@@ -111,7 +111,7 @@ export const brusselsOffers: Place[] = [
   },
 ];
 
-export const amsterdamOffers: Place[] = [
+export const amsterdamOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
@@ -182,7 +182,7 @@ export const amsterdamOffers: Place[] = [
   },
 ];
 
-export const hamburgOffers: Place[] = [
+export const hamburgOffers: Offer[] = [
   {
     id: 1,
     mark: 'Discount',
@@ -237,7 +237,7 @@ export const hamburgOffers: Place[] = [
   },
 ];
 
-export const dusselgorfOffers: Place[] = [
+export const dusselgorfOffers: Offer[] = [
   {
     id: 1,
     imageSource: 'img/apartment-02.jpg',
@@ -308,7 +308,7 @@ export const dusselgorfOffers: Place[] = [
   },
 ];
 
-export const mockOffers: Place[] = [
+export const mockOffers: Offer[] = [
   ...parisOffers,
   ...cologneOffers,
   ...brusselsOffers,

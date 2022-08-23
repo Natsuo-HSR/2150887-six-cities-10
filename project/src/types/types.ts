@@ -17,7 +17,7 @@ export enum SortOrder {
   HighToLow = 1
 }
 
-export type Place = {
+export type Offer = {
   id: number;
   mark?: string;
   imageSource: string;
@@ -34,7 +34,7 @@ export type Place = {
 export type Favorite = {
   id: number,
   city: string,
-  offers: Place[];
+  offers: Offer[];
 }
 
 export type Review = {

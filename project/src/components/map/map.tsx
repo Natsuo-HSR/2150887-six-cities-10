@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import { AppSection, Place } from '../../types/types';
+import { AppSection, Offer } from '../../types/types';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 
@@ -20,10 +20,10 @@ const selectedIconOrange = new Icon({
 
 type MapProps = {
   section: AppSection;
-  selectedPlace?: Place | null;
+  selectedOffer?: Offer | null;
 };
 
-export const Map = ({ section, selectedPlace }: MapProps): JSX.Element => {
+export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
   const city = useAppSelector((state) => state.city);
   const places = useAppSelector((state) => state.offers);
 
@@ -40,14 +40,14 @@ export const Map = ({ section, selectedPlace }: MapProps): JSX.Element => {
 
         marker
           .setIcon(
-            selectedPlace !== null && place.location.title === selectedPlace?.location.title
+            selectedOffer !== null && place.location.title === selectedOffer?.location.title
               ? selectedIconOrange
               : defaultIcon
           )
           .addTo(map);
       });
     }
-  }, [map, places, selectedPlace]);
+  }, [map, places, selectedOffer]);
 
   let className, style;
 

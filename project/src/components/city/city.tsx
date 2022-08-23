@@ -1,13 +1,13 @@
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setCityAction } from '../../store/actions';
-import { City } from '../../types/types';
+import { City as CityType } from '../../types/types';
 
-type CityItemProps = {
-  city: City;
+type CityProps = {
+  city: CityType;
   isActive: boolean;
 };
 
-export const CityItem = ({ city, isActive }: CityItemProps): JSX.Element => {
+export const City = ({ city, isActive }: CityProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   return (
