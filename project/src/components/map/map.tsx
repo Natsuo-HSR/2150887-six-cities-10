@@ -25,14 +25,14 @@ type MapProps = {
 
 export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
   const city = useAppSelector((state) => state.city);
-  const places = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      places.forEach((place) => {
+      offers.forEach((place) => {
         const marker = new Marker({
           lat: place.location.latitude,
           lng: place.location.longitude
@@ -47,7 +47,7 @@ export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
           .addTo(map);
       });
     }
-  }, [map, places, selectedOffer]);
+  }, [map, offers, selectedOffer]);
 
   let className, style;
 
