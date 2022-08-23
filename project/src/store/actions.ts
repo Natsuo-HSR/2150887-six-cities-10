@@ -1,9 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const Action = {
-  CHANGE_CITY: 'CHANGE_CITY',
-  LOAD_CITY_PLACES: 'LOAD_CITY_PLACES'
+  SET_CITY: 'SET_CITY',
+  SET_SORT_TYPE: 'SET_SORT_TYPE'
 };
 
-export const changeCityAction = createAction(Action.CHANGE_CITY, (value) => ({ payload: value }));
-export const loadCityPlacesAction = createAction(Action.LOAD_CITY_PLACES);
+export const setCityAction = createAction(Action.SET_CITY, (value) => ({ payload: value }));
+export const setSortTypeAction = createAction(Action.SET_SORT_TYPE, (value) => ({ payload: value }));

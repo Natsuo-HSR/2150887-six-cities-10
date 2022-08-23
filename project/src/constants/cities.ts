@@ -48,7 +48,7 @@ export const dusselgorf: City = {
   zoom: 12
 };
 
-export const mockCities: City[] = [
+export const cities: City[] = [
   paris,
   cologne,
   brussels,

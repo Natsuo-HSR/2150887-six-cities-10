@@ -1,16 +1,20 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
-import { mockPlaces } from '../../mocks/places';
+import { mockOffers } from '../../mocks/offers';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
-import { AppSection } from '../../types/types';
+import { AppSection, Place } from '../../types/types';
 import { Map } from '../../components/map/map';
 import { Header } from '../../components/header/header';
 
 
 export const PropertyPage = (): JSX.Element => {
+  const [selectedCard, setSelectedCard] = useState<null | Place>(null);
+  const selectCard = (offer: Place) => setSelectedCard(offer);
+
   const urlParams = useParams();
-  const property = mockPlaces.find(({id}) => id === Number(urlParams.id));
+  const property = mockOffers.find(({id}) => id === Number(urlParams.id));
 
   if (!property) {
     return <NotFoundPage />;
@@ -146,12 +150,12 @@ export const PropertyPage = (): JSX.Element => {
               <ReviewSection reviews={property.reviews} />
             </div>
           </div>
-          <Map section={AppSection.Property} />
+          <Map section={AppSection.Property} selectedPlace={selectedCard} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardList section={AppSection.Nearest} />
+            <PlaceCardList section={AppSection.Nearest} onMouseOver={selectCard} />
           </section>
         </div>
       </main>

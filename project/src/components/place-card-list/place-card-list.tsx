@@ -11,7 +11,7 @@ export const PlaceCardList = ({ section, onMouseOver }: PlaceCardListProps): JSX
   // prepare styles
   const sectionStyle = getSectionStyle(section);
 
-  const places = useAppSelector((state) => state.places);
+  const places = useAppSelector((state) => state.offers);
 
   return (
     <div className={sectionStyle}>

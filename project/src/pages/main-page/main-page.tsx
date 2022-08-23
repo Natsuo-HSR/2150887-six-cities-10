@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { CityItemList } from '../../components/city-item-list/city-item-list';
+import { Cities } from '../../components/cities/cities';
 import { Header } from '../../components/header/header';
 import { Map } from '../../components/map/map';
 import { PlaceCardList } from '../../components/place-card-list/place-card-list';
+import { PlacesSorting } from '../../components/places-sorting/places-sorting';
+import { cities } from '../../constants/cities';
 import { useAppSelector } from '../../hooks/useAppDispatch';
-import { mockCities } from '../../mocks/cities';
+import { options } from '../../mocks/sort-options';
 import { AppSection, Place } from '../../types/types';
 
 export const MainPage = (): JSX.Element => {
@@ -12,45 +14,19 @@ export const MainPage = (): JSX.Element => {
   const selectCard = (offer: Place) => setSelectedCard(offer);
 
   const city = useAppSelector((state) => state.city);
-  const cityPlaces = useAppSelector((state) => state.places);
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
-        <CityItemList cities={mockCities} />
-
+        <Cities cities={cities} />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityPlaces.length} places to stay in {city.title}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: low to high
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: high to low
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Top rated first
-                  </li>
-                </ul>
-              </form>
+              <b className="places__found">{offers.length} places to stay in {city.title}</b>
+              <PlacesSorting options={options} />
               <PlaceCardList section={AppSection.Main} onMouseOver={selectCard} />
             </section>
             <div className="cities__right-section">

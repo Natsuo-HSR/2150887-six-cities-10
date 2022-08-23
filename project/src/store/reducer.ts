@@ -1,20 +1,24 @@
-import { filterPlaces } from './../utils/functions';
+import { getOffers } from './../utils/functions';
 import { createReducer } from '@reduxjs/toolkit';
-import { paris } from '../mocks/cities';
-import { parisPlaces } from '../mocks/places';
-import { changeCityAction, loadCityPlacesAction } from './actions';
+import { paris } from '../constants/cities';
+import { parisOffers } from '../mocks/offers';
+import { setCityAction, setSortTypeAction } from './actions';
+import { SortType } from '../types/types';
 
 const initialState = {
   city: paris,
-  places: parisPlaces
+  offers: parisOffers,
+  sortType: SortType.Popular
 };
 
 export const updateStore = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeCityAction, (state, action) => {
+    .addCase(setCityAction, (state, action) => {
       state.city = action.payload;
+      state.offers = getOffers(state.city, state.sortType);
     })
-    .addCase(loadCityPlacesAction, (state) => {
-      state.places = filterPlaces(state.city);
+    .addCase(setSortTypeAction, (state, action) => {
+      state.sortType = action.payload;
+      state.offers = getOffers(state.city, state.sortType);
     });
 });

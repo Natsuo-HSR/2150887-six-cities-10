@@ -5,6 +5,18 @@ export enum AppSection {
   Property = 'property',
 }
 
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
+}
+
+export enum SortOrder {
+  LowToHigh = -1,
+  HighToLow = 1
+}
+
 export type Place = {
   id: number;
   mark?: string;
