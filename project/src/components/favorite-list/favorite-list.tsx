@@ -9,7 +9,7 @@ type FavoriteListProps = {
 export const FavoriteList = ({ favorites }: FavoriteListProps): JSX.Element => {
   const [, setActiveCard] = useState<null | Offer>(null);
 
-  const makeCardActive = (offer: Offer) => setActiveCard(offer);
+  const handleCardMouseOver = (offer: Offer) => setActiveCard(offer);
 
   return (
     <ul className="favorites__list">
@@ -24,7 +24,7 @@ export const FavoriteList = ({ favorites }: FavoriteListProps): JSX.Element => {
           </div>
 
           <div className="favorites__places">
-            {favorite.offers.map((offer) => <OfferCard section={AppSection.Favorites} key={offer.id} offer={offer} onMouseOver={makeCardActive} />)}
+            {favorite.offers.map((offer) => <OfferCard section={AppSection.Favorites} key={offer.id} offer={offer} onMouseOver={handleCardMouseOver} />)}
           </div>
         </li>
       ))}

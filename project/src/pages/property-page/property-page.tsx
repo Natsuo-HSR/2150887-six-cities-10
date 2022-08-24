@@ -11,7 +11,7 @@ import { OfferCardList } from '../../components/offer-card-list/offer-card-list'
 
 export const PropertyPage = (): JSX.Element => {
   const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
-  const selectCard = (offer: Offer) => setSelectedCard(offer);
+  const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
 
   const urlParams = useParams();
   const property = mockOffers.find(({id}) => id === Number(urlParams.id));
@@ -155,7 +155,7 @@ export const PropertyPage = (): JSX.Element => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferCardList section={AppSection.Nearest} onMouseOver={selectCard} />
+            <OfferCardList section={AppSection.Nearest} onMouseOver={handleCardMouseOver} />
           </section>
         </div>
       </main>

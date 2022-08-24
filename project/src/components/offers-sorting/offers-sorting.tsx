@@ -8,19 +8,19 @@ type OffersSoringType = {
 }
 
 export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
-  const [isOpened, setOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
   const dispatch = useAppDispatch();
   const sortType = useAppSelector((state) => state.sortType);
 
-  const onSortChange = (option: SortType) => {
+  const handleSortChange = (option: SortType) => {
     dispatch(setSortTypeAction(option));
-    setOpened(false);
+    setIsOpened(false);
   };
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by &nbsp;</span>
-      <span className="places__sorting-type" tabIndex={0} onClick={() => setOpened(!isOpened)}>
+      <span className="places__sorting-type" tabIndex={0} onClick={() => setIsOpened(!isOpened)}>
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -33,7 +33,7 @@ export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
               className={`places__option ${option === sortType ? 'places__option--active' : undefined}`}
               tabIndex={0}
               key={option}
-              onClick={() => onSortChange(option)}
+              onClick={() => handleSortChange(option)}
             >
               {option}
             </li>))
