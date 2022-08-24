@@ -1,21 +1,21 @@
 import { useAppSelector } from '../../hooks/useAppDispatch';
-import { AppSection, Place } from '../../types/types';
-import { PlaceCard } from '../place-card/place-card';
+import { AppSection, Offer } from '../../types/types';
+import { OfferCard } from '../offer-card/offer-card';
 
-type PlaceCardListProps = {
+type OfferCardListProps = {
   section: AppSection;
-  onMouseOver?: (place: Place) => void;
+  onMouseOver?: (place: Offer) => void;
 }
 
-export const PlaceCardList = ({ section, onMouseOver }: PlaceCardListProps): JSX.Element => {
+export const OfferCardList = ({ section, onMouseOver }: OfferCardListProps): JSX.Element => {
   // prepare styles
   const sectionStyle = getSectionStyle(section);
 
-  const places = useAppSelector((state) => state.places);
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className={sectionStyle}>
-      { places.map((place) => <PlaceCard section={section} key={place.id} place={place} onMouseOver={onMouseOver ? onMouseOver : undefined} />) }
+      { offers.map((offer) => <OfferCard section={section} key={offer.id} offer={offer} onMouseOver={onMouseOver ? onMouseOver : undefined} />) }
     </div>
   );
 };

@@ -1,25 +1,25 @@
 import { Link } from 'react-router-dom';
-import { AppSection, Place } from '../../types/types';
+import { AppSection, Offer } from '../../types/types';
 
-type PlaceCardProps = {
+type OfferCardProps = {
   section: AppSection;
-  place: Place;
-  onMouseOver?: (place: Place) => void;
+  offer: Offer;
+  onMouseOver?: (place: Offer) => void;
 }
 
-export const PlaceCard = ({
+export const OfferCard = ({
   section,
-  place,
+  offer,
   onMouseOver,
-}: PlaceCardProps): JSX.Element => {
-  const {id, mark, imageSource, bookmarked, price, rating, description, type} = place;
+}: OfferCardProps): JSX.Element => {
+  const {id, mark, imageSource, bookmarked, price, rating, description, type} = offer;
 
   // prepare styles
   const imageSizes = getImageSizes(section);
   const sectionStyle = getSectionStyle(section);
 
   return (
-    <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(place) : undefined}>
+    <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(offer) : undefined}>
       {
         mark ?
           <div className="place-card__mark">

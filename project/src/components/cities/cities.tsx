@@ -1,12 +1,12 @@
 import { useAppSelector } from '../../hooks/useAppDispatch';
-import { City } from '../../types/types';
-import { CityItem } from '../city-item/city-item';
+import { City as CityType } from '../../types/types';
+import { City } from '../city/city';
 
-type CityItemListProps = {
-  cities: City[];
+type CitiesProps = {
+  cities: CityType[];
 };
 
-export const CityItemList = ({ cities }: CityItemListProps): JSX.Element => {
+export const Cities = ({ cities }: CitiesProps): JSX.Element => {
   const choosedCity = useAppSelector((state) => state.city);
 
   return (
@@ -15,7 +15,7 @@ export const CityItemList = ({ cities }: CityItemListProps): JSX.Element => {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((city) => <CityItem key={city.latitude} isActive={city.title === choosedCity.title} city={city} />)}
+            {cities.map((city) => <City key={city.id} isActive={city.title === choosedCity.title} city={city} />)}
           </ul>
         </section>
       </div>

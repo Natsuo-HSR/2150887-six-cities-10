@@ -1,19 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import { AppSection, Place } from '../../types/types';
-import { URL_MARKER_DEFAULT, URL_MARKER_SELECTED } from '../../constants/markers';
+import { AppSection, Offer } from '../../types/types';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 
 const defaultIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
 
-const selectedIcon = new Icon({
-  iconUrl: URL_MARKER_SELECTED,
+const selectedIconOrange = new Icon({
+  iconUrl: 'img/pin-active.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
@@ -21,19 +20,19 @@ const selectedIcon = new Icon({
 
 type MapProps = {
   section: AppSection;
-  selectedPlace?: Place | null;
+  selectedOffer?: Offer | null;
 };
 
-export const Map = ({ section, selectedPlace }: MapProps): JSX.Element => {
+export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
   const city = useAppSelector((state) => state.city);
-  const places = useAppSelector((state) => state.places);
+  const offers = useAppSelector((state) => state.offers);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      places.forEach((place) => {
+      offers.forEach((place) => {
         const marker = new Marker({
           lat: place.location.latitude,
           lng: place.location.longitude
@@ -41,14 +40,14 @@ export const Map = ({ section, selectedPlace }: MapProps): JSX.Element => {
 
         marker
           .setIcon(
-            selectedPlace !== null && place.location.title === selectedPlace?.location.title
-              ? selectedIcon
+            selectedOffer !== null && place.location.title === selectedOffer?.location.title
+              ? selectedIconOrange
               : defaultIcon
           )
           .addTo(map);
       });
     }
-  }, [map, places, selectedPlace]);
+  }, [map, offers, selectedOffer]);
 
   let className, style;
 

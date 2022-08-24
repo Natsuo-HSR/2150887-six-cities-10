@@ -1,13 +1,13 @@
-import { Place, Favorite } from '../types/types';
+import { Offer, Favorite } from '../types/types';
 import { defaultReview, detailedReviews } from './reviews';
 
-export const parisPlaces: Place[] = [
+export const parisOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
     imageSource: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 3,
     description: 'Wood and stone place',
     type: 'Apartment',
     city: 'Paris',
@@ -38,13 +38,13 @@ export const parisPlaces: Place[] = [
   },
 ];
 
-export const colognePlaces: Place[] = [
+export const cologneOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
     imageSource: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 5,
     description: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     city: 'Cologne',
@@ -75,12 +75,12 @@ export const colognePlaces: Place[] = [
   },
 ];
 
-export const brusselsPlaces: Place[] = [
+export const brusselsOffers: Offer[] = [
   {
     id: 1,
     imageSource: 'img/apartment-02.jpg',
     price: 132,
-    rating: 4,
+    rating: 1,
     description: 'Canal View Prinsengracht',
     type: 'Apartment',
     city: 'Brussels',
@@ -111,13 +111,13 @@ export const brusselsPlaces: Place[] = [
   },
 ];
 
-export const amsterdamPlaces: Place[] = [
+export const amsterdamOffers: Offer[] = [
   {
     id: 1,
     mark: 'Premium',
     imageSource: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 0,
     description: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     city: 'Amsterdam',
@@ -134,7 +134,7 @@ export const amsterdamPlaces: Place[] = [
     imageSource: 'img/room.jpg',
     bookmarked: true,
     price: 80,
-    rating: 4,
+    rating: 2,
     description: 'Wood and stone place',
     type: 'Private room',
     city: 'Amsterdam',
@@ -182,14 +182,14 @@ export const amsterdamPlaces: Place[] = [
   },
 ];
 
-export const hamburgPlaces: Place[] = [
+export const hamburgOffers: Offer[] = [
   {
     id: 1,
     mark: 'Discount',
     imageSource: 'img/apartment-03.jpg',
     bookmarked: true,
     price: 180,
-    rating: 5,
+    rating: 1,
     description: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     city: 'Hamburg',
@@ -206,7 +206,7 @@ export const hamburgPlaces: Place[] = [
     mark: 'Premium',
     imageSource: 'img/apartment-01.jpg',
     price: 120,
-    rating: 4,
+    rating: 3,
     description: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     city: 'Hamburg',
@@ -237,12 +237,12 @@ export const hamburgPlaces: Place[] = [
   },
 ];
 
-export const dusselgorfPlaces: Place[] = [
+export const dusselgorfOffers: Offer[] = [
   {
     id: 1,
     imageSource: 'img/apartment-02.jpg',
     price: 132,
-    rating: 4,
+    rating: 1,
     description: 'Canal View Prinsengracht',
     type: 'Apartment',
     city: 'Dusselgorf',
@@ -294,7 +294,7 @@ export const dusselgorfPlaces: Place[] = [
     imageSource: 'img/room.jpg',
     bookmarked: true,
     price: 80,
-    rating: 4,
+    rating: 2,
     description: 'Wood and stone place',
     type: 'Private room',
     city: 'Dusselgorf',
@@ -308,13 +308,13 @@ export const dusselgorfPlaces: Place[] = [
   },
 ];
 
-export const mockPlaces: Place[] = [
-  ...parisPlaces,
-  ...colognePlaces,
-  ...brusselsPlaces,
-  ...amsterdamPlaces,
-  ...hamburgPlaces,
-  ...dusselgorfPlaces
+export const mockOffers: Offer[] = [
+  ...parisOffers,
+  ...cologneOffers,
+  ...brusselsOffers,
+  ...amsterdamOffers,
+  ...hamburgOffers,
+  ...dusselgorfOffers
 ];
 
 export const favorites: Favorite[] = [
@@ -322,15 +322,15 @@ export const favorites: Favorite[] = [
     id: 1,
     city: 'Amsterdam',
     offers: [
-      mockPlaces[4],
-      mockPlaces[5]
+      mockOffers[4],
+      mockOffers[5]
     ]
   },
   {
     id: 2,
     city: 'Cologne',
     offers: [
-      mockPlaces[6]
+      mockOffers[6]
     ]
   }
 ];

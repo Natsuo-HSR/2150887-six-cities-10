@@ -5,7 +5,19 @@ export enum AppSection {
   Property = 'property',
 }
 
-export type Place = {
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
+}
+
+export enum SortOrder {
+  LowToHigh = -1,
+  HighToLow = 1
+}
+
+export type Offer = {
   id: number;
   mark?: string;
   imageSource: string;
@@ -22,7 +34,7 @@ export type Place = {
 export type Favorite = {
   id: number,
   city: string,
-  offers: Place[];
+  offers: Offer[];
 }
 
 export type Review = {
