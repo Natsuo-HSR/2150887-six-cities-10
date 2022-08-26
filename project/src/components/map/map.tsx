@@ -40,7 +40,7 @@ export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
 
         marker
           .setIcon(
-            selectedOffer !== null && place.location.title === selectedOffer?.location.title
+            selectedOffer !== null && place.id === selectedOffer?.id
               ? selectedIconOrange
               : defaultIcon
           )

@@ -10,20 +10,13 @@ function useMap(
   const isInitilized = useRef<boolean>(false);
 
   useEffect(() => {
-    if (isInitilized.current && map !== null) {
-      map.flyTo(
-        [city.latitude, city.longitude],
-        city.zoom
-      );
-    }
-
     if (mapRef.current !== null && map === null && !isInitilized.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.latitude,
-          lng: city.longitude
+          lat: city.location.latitude,
+          lng: city.location.longitude
         },
-        zoom: city.zoom
+        zoom: city.location.zoom
       });
 
       const layer = new TileLayer(
@@ -39,6 +32,12 @@ function useMap(
       setMap(instance);
       isInitilized.current = true;
     }
+
+    return () => {
+      if (isInitilized.current && map !== null) {
+        map.remove();
+      }
+    };
   }, [mapRef, map, city]);
 
   return map;

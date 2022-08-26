@@ -19,21 +19,27 @@ export enum SortOrder {
 
 export type Offer = {
   id: number;
-  mark?: string;
-  imageSource: string;
-  bookmarked?: boolean;
-  price: number;
+  city: City;
+  previewImage: string;
+  images: string[];
+  title: string;
+  isFavorite?: boolean;
+  isPremium?: boolean;
   rating: number;
-  description: string;
   type: string;
-  city: string;
-  location: MapPoint;
-  reviews: Review[];
+  bedrooms: number;
+  maxAdults: number;
+  price: number;
+  goods: string[];
+  host: Host;
+  description: string;
+  location: Location;
+  bookmarked?: boolean;
+  reviews?: Review[];
 }
 
 export type Favorite = {
-  id: number,
-  city: string,
+  cityName: string,
   offers: Offer[];
 }
 
@@ -47,16 +53,19 @@ export type Review = {
 }
 
 export type City = {
-  id: number;
-  title: string;
-  latitude: number;
-  longitude: number;
-  zoom: number;
+  name: string;
+  location: Location;
 };
 
-export type MapPoint = {
-  title: string,
+export type Location = {
   latitude: number;
   longitude: number;
   zoom: number;
+}
+
+export type Host = {
+  id: number
+  name: string;
+  sPro: boolean;
+  avatarUrl: string;
 }
