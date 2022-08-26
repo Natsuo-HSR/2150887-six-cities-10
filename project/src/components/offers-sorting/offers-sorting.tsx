@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
-import { setSortTypeAction } from '../../store/actions';
+import { sortOffersAction } from '../../store/actions';
 import { SortType } from '../../types/types';
 
 type OffersSoringType = {
@@ -13,7 +13,7 @@ export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
   const sortType = useAppSelector((state) => state.sortType);
 
   const handleSortChange = (option: SortType) => {
-    dispatch(setSortTypeAction(option));
+    dispatch(sortOffersAction(option));
     setIsOpened(false);
   };
 

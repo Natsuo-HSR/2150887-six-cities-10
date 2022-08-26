@@ -4,8 +4,8 @@ import { getOffers } from './../utils/functions';
 import { paris } from '../constants/cities';
 import {
   loadOffersAction,
-  setCityAction,
-  setSortTypeAction,
+  loadOffersByCityAction,
+  sortOffersAction,
   setErrorAction,
   setIsOffersLoadedAction,
   loadFavoritesAction,
@@ -32,12 +32,12 @@ const initialState: InitialState = {
 
 export const updateStore = createReducer(initialState, (builder) => {
   builder
-    .addCase(setCityAction, (state, action) => {
+    .addCase(loadOffersByCityAction, (state, action) => {
       state.isOffersLoaded = false;
       state.city = action.payload;
       state.offers = getOffers(state.offers, state.city, state.sortType);
     })
-    .addCase(setSortTypeAction, (state, action) => {
+    .addCase(sortOffersAction, (state, action) => {
       state.sortType = action.payload;
       state.offers = getOffers(state.offers, state.city, state.sortType);
     })

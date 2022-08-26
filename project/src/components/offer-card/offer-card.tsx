@@ -12,7 +12,7 @@ export const OfferCard = ({
   offer,
   onMouseOver,
 }: OfferCardProps): JSX.Element => {
-  const {id, isPremium, previewImage, bookmarked, price, rating, title: description, type} = offer;
+  const {id, isPremium, previewImage, bookmarked, price, rating, title, type} = offer;
 
   // prepare styles
   const imageSizes = getImageSizes(section);
@@ -53,7 +53,7 @@ export const OfferCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{description}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
