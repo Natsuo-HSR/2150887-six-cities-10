@@ -4,3 +4,7 @@ export enum AppRoutes {
   Favorites = '/favorites',
   Property = '/offer/:id',
 }
+
+export enum APIRoute {
+  Offers = '/hotels'
+}

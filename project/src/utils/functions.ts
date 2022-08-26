@@ -1,9 +1,13 @@
 import { SortOrder } from './../types/types';
-import { mockOffers } from '../mocks/offers';
 import { City, Offer, SortType } from '../types/types';
 
-export const getOffers = (city: City, sortType: SortType): Offer[] => {
-  const filteredOffers = mockOffers.filter((place) => place.city === city.title);
+
+export const findOfferById = (offers: Offer[], givenId: number): Offer | undefined => (
+  offers.find(({id}) => id === givenId)
+);
+
+export const getOffers = (offers: Offer[], city: City, sortType: SortType): Offer[] => {
+  const filteredOffers = offers.filter((place) => place.city.name === city.name);
   return sortOffers(filteredOffers, sortType);
 };
 

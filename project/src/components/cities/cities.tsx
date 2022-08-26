@@ -15,7 +15,7 @@ export const Cities = ({ cities }: CitiesProps): JSX.Element => {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((city) => <City key={city.id} isActive={city.title === choosedCity.title} city={city} />)}
+            {cities.map((city) => <City key={city.name} isActive={city.name === choosedCity.name} city={city} />)}
           </ul>
         </section>
       </div>

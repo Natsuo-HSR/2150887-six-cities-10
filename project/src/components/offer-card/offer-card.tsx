@@ -12,7 +12,7 @@ export const OfferCard = ({
   offer,
   onMouseOver,
 }: OfferCardProps): JSX.Element => {
-  const {id, mark, imageSource, bookmarked, price, rating, description, type} = offer;
+  const {id, isPremium, previewImage, bookmarked, price, rating, title: description, type} = offer;
 
   // prepare styles
   const imageSizes = getImageSizes(section);
@@ -21,16 +21,16 @@ export const OfferCard = ({
   return (
     <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(offer) : undefined}>
       {
-        mark ?
+        isPremium ?
           <div className="place-card__mark">
-            <span>{mark}</span>
+            <span>Premium</span>
           </div>
           :
-          null
+          undefined
       }
       <div className={`${sectionStyle}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={imageSource} {...imageSizes} alt="Place image" />
+          <img className="place-card__image" src={previewImage} {...imageSizes} alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">

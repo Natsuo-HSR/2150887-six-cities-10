@@ -6,13 +6,8 @@ import { NotFoundPage } from '../../pages/not-fount-page/not-found-page';
 import { PropertyPage } from '../../pages/property-page/property-page';
 import { AppRoutes } from '../../constants/routes';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { Favorite } from '../../types/types';
 
-type AppProps = {
-  favorites: Favorite[];
-}
-
-export const App = ({ favorites } : AppProps): JSX.Element => (
+export const App = (): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route
@@ -27,7 +22,7 @@ export const App = ({ favorites } : AppProps): JSX.Element => (
         path={AppRoutes.Favorites}
         element={
           <ProtectedRoute isAuthorized>
-            <FavoritesPage favorites={favorites} />
+            <FavoritesPage />
           </ProtectedRoute>
         }
       />

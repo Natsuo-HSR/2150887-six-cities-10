@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { mockOffers } from '../../mocks/offers';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
 import { AppSection, Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
 import { Header } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
+import { useAppSelector } from '../../hooks/useAppDispatch';
+import { findOfferById } from '../../utils/functions';
 
 
 export const PropertyPage = (): JSX.Element => {
@@ -14,13 +15,15 @@ export const PropertyPage = (): JSX.Element => {
   const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
 
   const urlParams = useParams();
-  const property = mockOffers.find(({id}) => id === Number(urlParams.id));
+  const currentOffer = findOfferById(useAppSelector((state) => state.offers), Number(urlParams.id));
 
-  if (!property) {
+  if (!currentOffer) {
     return <NotFoundPage />;
   }
 
-  const { mark, imageSource, price, rating, description, type } = property;
+  const { isPremium, images, price, rating, description, type, maxAdults, bedrooms, goods } = currentOffer;
+
+  const slicedImages = images.slice(0, 6);
 
   return (
     <>
@@ -29,32 +32,21 @@ export const PropertyPage = (): JSX.Element => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src={imageSource} alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {
+                slicedImages.map((image) => (
+                  <div className="property__image-wrapper" key={image}>
+                    <img className="property__image" src={image} alt="Photo studio" />
+                  </div>
+                ))
+              }
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
               {
-                mark ?
+                isPremium ?
                   <div className="property__mark">
-                    <span>{mark}</span>
+                    <span>Premium</span>
                   </div>
                   :
                   null
@@ -80,10 +72,10 @@ export const PropertyPage = (): JSX.Element => {
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {`${bedrooms} Bedrooms`}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  {`Max ${maxAdults} adults`}
                 </li>
               </ul>
               <div className="property__price">
@@ -93,36 +85,13 @@ export const PropertyPage = (): JSX.Element => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+                  {
+                    goods.map((item) => (
+                      <li className="property__inside-item" key={item}>
+                        {item}
+                      </li>
+                    ))
+                  }
                 </ul>
               </div>
               <div className="property__host">
@@ -147,7 +116,9 @@ export const PropertyPage = (): JSX.Element => {
                   </p>
                 </div>
               </div>
-              <ReviewSection reviews={property.reviews} />
+              {
+                currentOffer.reviews ? <ReviewSection reviews={currentOffer.reviews} /> : undefined
+              }
             </div>
           </div>
           <Map section={AppSection.Property} selectedOffer={selectedCard} />

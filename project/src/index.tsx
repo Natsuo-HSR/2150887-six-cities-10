@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { App } from './components/app/app';
-import { favorites } from './mocks/offers';
+import { ErrorMessage } from './components/error-message/error-message';
 import { store } from './store';
+import { fetchFavoritesAction, fetchOffersAction } from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(fetchFavoritesAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -12,9 +16,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        favorites={favorites}
-      />
+      <ErrorMessage />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

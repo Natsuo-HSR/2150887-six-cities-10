@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import { AppSection, Favorite, Offer } from '../../types/types';
+import { useAppSelector } from '../../hooks/useAppDispatch';
+import { AppSection, Offer } from '../../types/types';
 import { OfferCard } from '../offer-card/offer-card';
 
-type FavoriteListProps = {
-  favorites: Favorite[]
-}
-
-export const FavoriteList = ({ favorites }: FavoriteListProps): JSX.Element => {
+export const FavoriteList = (): JSX.Element => {
+  const favorites = useAppSelector((state) => state.favorites);
   const [, setActiveCard] = useState<null | Offer>(null);
-
   const handleCardMouseOver = (offer: Offer) => setActiveCard(offer);
 
   return (
     <ul className="favorites__list">
       {favorites.map((favorite) => (
-        <li className="favorites__locations-items" key={favorite.id}>
+        <li className="favorites__locations-items" key={favorite.cityName}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#todo">
-                <span>{favorite.city}</span>
+                <span>{favorite.cityName}</span>
               </a>
             </div>
           </div>
