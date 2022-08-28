@@ -8,8 +8,5 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps): JSX.Element => {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  if (authorizationStatus !== AuthorizationStatus.Auth) {
-    return <Navigate to='/login' />;
-  }
-  return children;
+  return authorizationStatus !== AuthorizationStatus.Auth ? <Navigate to='/login' /> : children;
 };
