@@ -6,34 +6,45 @@ import { NotFoundPage } from '../../pages/not-fount-page/not-found-page';
 import { PropertyPage } from '../../pages/property-page/property-page';
 import { AppRoutes } from '../../constants/routes';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { useAppSelector } from '../../hooks/useAppDispatch';
+import { isCheckedAuth } from '../../utils/functions';
+import { Spinner } from '../spinner/spinner';
 
-export const App = (): JSX.Element => (
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path={AppRoutes.Index}
-        element={<MainPage />}
-      />
-      <Route
-        path={AppRoutes.Login}
-        element={<LoginPage />}
-      />
-      <Route
-        path={AppRoutes.Favorites}
-        element={
-          <ProtectedRoute isAuthorized>
-            <FavoritesPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={AppRoutes.Property}
-        element={<PropertyPage />}
-      />
-      <Route
-        path="*"
-        element={<NotFoundPage />}
-      />
-    </Routes>
-  </BrowserRouter>
-);
+export const App = (): JSX.Element => {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  if (isCheckedAuth(authorizationStatus)) {
+    return <Spinner />;
+  }
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoutes.Index}
+          element={<MainPage />}
+        />
+        <Route
+          path={AppRoutes.Login}
+          element={<LoginPage />}
+        />
+        <Route
+          path={AppRoutes.Favorites}
+          element={
+            <ProtectedRoute >
+              <FavoritesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.Property}
+          element={<PropertyPage />}
+        />
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};

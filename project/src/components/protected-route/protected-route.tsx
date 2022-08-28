@@ -1,10 +1,15 @@
 import { Navigate } from 'react-router-dom';
+import { AuthorizationStatus } from '../../constants/api';
+import { useAppSelector } from '../../hooks/useAppDispatch';
 
 type ProtectedRouteProps = {
-  isAuthorized: boolean;
   children: JSX.Element
 }
 
-export const ProtectedRoute = ({ isAuthorized, children }: ProtectedRouteProps): JSX.Element => (
-  isAuthorized ? children : <Navigate to='/login' />
-);
+export const ProtectedRoute = ({ children }: ProtectedRouteProps): JSX.Element => {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  if (authorizationStatus !== AuthorizationStatus.Auth) {
+    return <Navigate to='/login' />;
+  }
+  return children;
+};

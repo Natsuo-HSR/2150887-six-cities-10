@@ -5,6 +5,8 @@ export enum AppRoutes {
   Property = '/offer/:id',
 }
 
-export enum APIRoute {
-  Offers = '/hotels'
+export enum APIRoutes {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
 }
