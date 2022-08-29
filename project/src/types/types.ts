@@ -69,3 +69,17 @@ export type Host = {
   sPro: boolean;
   avatarUrl: string;
 }
+
+export type AuthData = {
+  login: string;
+  password: string;
+};
+
+export type UserInfo = {
+  id: number;
+  email: string;
+  name: string;
+  token: string;
+  avatarUrl: string;
+  isPro: boolean;
+};

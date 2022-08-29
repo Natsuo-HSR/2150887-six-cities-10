@@ -53,7 +53,9 @@ export const OfferCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -1,21 +1,34 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
 import { AppSection, Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
 import { Header } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
-import { useAppSelector } from '../../hooks/useAppDispatch';
-import { findOfferById } from '../../utils/functions';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
+import { Spinner } from '../../components/spinner/spinner';
+import { useParams } from 'react-router-dom';
+import { loadCurrentOfferAction } from '../../store/actions';
 
 
 export const PropertyPage = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
   const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
 
   const urlParams = useParams();
-  const currentOffer = findOfferById(useAppSelector((state) => state.offers), Number(urlParams.id));
+
+  useEffect(() => {
+    dispatch(loadCurrentOfferAction(Number(urlParams.id)));
+  }, [urlParams.id]);
+
+  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const isCurrentOfferLoaded = useAppSelector((state) => state.isCurrentOfferLoaded);
+
+
+  if (!isCurrentOfferLoaded) {
+    return <Spinner />;
+  }
 
   if (!currentOffer) {
     return <NotFoundPage />;

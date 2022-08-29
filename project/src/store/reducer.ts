@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { City, Favorite, Offer, SortType } from './../types/types';
-import { getOffers } from './../utils/functions';
+import { findOfferById, getOffers } from './../utils/functions';
 import { paris } from '../constants/cities';
 import {
   loadOffersAction,
@@ -10,14 +10,21 @@ import {
   setIsOffersLoadedAction,
   loadFavoritesAction,
   clearErrorAction,
+  requireAuthorizationAction,
+  loadCurrentOfferAction,
+  setIsCurrentOfferLoadedAction,
 } from './actions';
+import { AuthorizationStatus } from '../constants/api';
 
 type InitialState = {
   city: City,
   offers: Offer[],
   isOffersLoaded: boolean,
   favorites: Favorite[];
+  currentOffer: Offer | undefined;
+  isCurrentOfferLoaded: boolean;
   sortType: SortType,
+  authorizationStatus: AuthorizationStatus,
   error: string | null,
 }
 
@@ -26,8 +33,11 @@ const initialState: InitialState = {
   offers: [],
   isOffersLoaded: false,
   favorites: [],
+  currentOffer: undefined,
+  isCurrentOfferLoaded: false,
   sortType: SortType.Popular,
-  error: null
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
 };
 
 export const updateStore = createReducer(initialState, (builder) => {
@@ -50,10 +60,20 @@ export const updateStore = createReducer(initialState, (builder) => {
     .addCase(loadFavoritesAction, (state, action) => {
       state.favorites = action.payload;
     })
+    .addCase(loadCurrentOfferAction, (state, action) => {
+      state.currentOffer = findOfferById(state.offers, action.payload);
+      state.isCurrentOfferLoaded = true;
+    })
+    .addCase(setIsCurrentOfferLoadedAction, (state, action) => {
+      state.isCurrentOfferLoaded = action.payload;
+    })
     .addCase(setErrorAction, (state, action) => {
       state.error = action.payload;
     })
     .addCase(clearErrorAction, (state) => {
       state.error = null;
+    })
+    .addCase(requireAuthorizationAction, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });

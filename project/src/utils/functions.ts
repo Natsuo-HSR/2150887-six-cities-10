@@ -1,6 +1,9 @@
 import { SortOrder } from './../types/types';
 import { City, Offer, SortType } from '../types/types';
+import { AuthorizationStatus } from '../constants/api';
 
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
 
 export const findOfferById = (offers: Offer[], givenId: number): Offer | undefined => (
   offers.find(({id}) => id === givenId)
