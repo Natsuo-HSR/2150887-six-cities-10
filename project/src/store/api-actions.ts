@@ -23,12 +23,8 @@ export const fetchOfferById = createAsyncThunk<Offer | undefined, number, {
 }>(
   'data/fetchOfferById',
   async (id, { extra: api }) => {
-    try {
-      const { data } = await api.get<Offer>(`${APIRoutes.OfferById.replace('{hotelId}', id.toString())}`);
-      return data;
-    } catch {
-      return undefined;
-    }
+    const { data } = await api.get<Offer>(`${APIRoutes.OfferById.replace('{hotelId}', id.toString())}`);
+    return data;
   },
 );
 

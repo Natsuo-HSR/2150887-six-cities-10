@@ -24,7 +24,7 @@ export const setCity = createAction<City>('offer/setCity');
 export const sortOffers = createAction<SortType>('offer/sortOffers');
 
 export const offerProcess = createSlice({
-  name: NameSpace.Data,
+  name: NameSpace.Offer,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -50,6 +50,10 @@ export const offerProcess = createSlice({
       })
       .addCase(fetchOfferById.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
+        state.isCurrentOfferLoaded = true;
+      })
+      .addCase(fetchOfferById.rejected, (state) => {
+        state.currentOffer = undefined;
         state.isCurrentOfferLoaded = true;
       })
       .addCase(fetchNearbyOffers.pending, (state) => {

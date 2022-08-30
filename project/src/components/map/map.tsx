@@ -48,13 +48,6 @@ export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element =
           )
           .addTo(map);
       });
-
-      map.flyTo([city.location.latitude, city.location.longitude], city.location.zoom);
-      // return () => {
-      //   if (mapRef.current !== null && mapRef.current) {
-      //     map.eachLayer((layer) => layer instanceof Leaflet.Marker ? map.removeLayer(layer) : '');
-      //   }
-      // };
     }
   }, [map, offers, selectedOffer]);
 
