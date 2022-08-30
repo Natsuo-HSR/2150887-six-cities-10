@@ -28,8 +28,6 @@ export const PropertyPage = (): JSX.Element => {
 
   const currentOffer = useAppSelector((state) => state.currentOffer);
   const isCurrentOfferLoaded = useAppSelector((state) => state.isCurrentOfferLoaded);
-  const reviews = useAppSelector((state) => state.reviews);
-  const isReviewsLoaded = useAppSelector((state) => state.isReviewsLoaded);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const isNearbyOffersLoaded = useAppSelector((state) => state.isNearbyOffersLoaded);
 
@@ -136,9 +134,7 @@ export const PropertyPage = (): JSX.Element => {
                   </p>
                 </div>
               </div>
-              {
-                isReviewsLoaded ? <ReviewSection reviews={reviews} /> : <Spinner />
-              }
+              <ReviewSection />
             </div>
           </div>
           {

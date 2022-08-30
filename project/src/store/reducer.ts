@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { City, Offer, SortType, Review } from './../types/types';
-import { getOffers } from './../utils/functions';
+import { getOffers, sortReviews } from './../utils/functions';
 import { paris } from '../constants/cities';
 import {
   setOffers,
@@ -91,7 +91,7 @@ export const updateStore = createReducer(initialState, (builder) => {
       state.isNearbyOffersLoaded = action.payload;
     })
     .addCase(setReviews, (state, action) => {
-      state.reviews = action.payload;
+      state.reviews = sortReviews(action.payload, SortType.DateNewToLow);
     })
     .addCase(setIsReviewsLoaded, (state, action) => {
       state.isReviewsLoaded = action.payload;

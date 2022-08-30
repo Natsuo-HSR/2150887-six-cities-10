@@ -1,4 +1,4 @@
-import { SortOrder } from './../types/types';
+import { SortOrder, Review } from './../types/types';
 import { City, Offer, SortType } from '../types/types';
 import { AuthorizationStatus } from '../constants/api';
 
@@ -34,6 +34,8 @@ const sortOffers = (offers: Offer[], sortType: SortType): Offer[] => {
       return sortByPrice(offers, SortOrder.LowToHigh);
     case SortType.TopRatedFirst:
       return sortByTopRating(offers);
+    default:
+      return offers;
   }
 };
 
@@ -46,3 +48,21 @@ const sortByPrice = (offers: Offer[], order: SortOrder) => {
   }
 };
 const sortByTopRating = (offers: Offer[]) => offers.sort((a, b) => b.rating - a.rating);
+
+export const sortReviews = (reviews: Review[], sortType: SortType) => {
+  switch(sortType) {
+    case SortType.DateNewToLow:
+      return sortByDate(reviews, SortOrder.HighToLow);
+    default:
+      return reviews;
+  }
+};
+
+const sortByDate = (reviews: Review[], order: SortOrder) => {
+  if (order > 0) {
+    return reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
+  else {
+    return reviews.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
+};

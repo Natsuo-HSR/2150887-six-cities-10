@@ -2,7 +2,8 @@ export enum SortType {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
-  TopRatedFirst = 'Top rated first'
+  TopRatedFirst = 'Top rated first',
+  DateNewToLow = 'Date: new to low',
 }
 
 export enum SortOrder {

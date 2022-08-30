@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import L, { Icon, Marker } from 'leaflet';
+import Leaflet, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { Offer } from '../../types/types';
 import 'leaflet/dist/leaflet.css';
@@ -48,7 +48,7 @@ export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element =
           .addTo(map);
       });
       return () => {
-        map.eachLayer((l) => l instanceof L.Marker ? map.removeLayer(l) : '');
+        map.eachLayer((layer) => layer instanceof Leaflet.Marker ? map.removeLayer(layer) : '');
       };
     }
   }, [map, offers, selectedOffer]);
