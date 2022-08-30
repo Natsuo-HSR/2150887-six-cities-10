@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { App } from './components/app/app';
 import { ErrorMessage } from './components/error-message/error-message';
 import { store } from './store';
-import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from './store/api-actions';
+import { checkAuth, fetchFavoriteOffers, fetchOffers } from './store/api-actions';
 
-store.dispatch(fetchOffersAction());
-store.dispatch(fetchFavoritesAction());
-store.dispatch(checkAuthAction());
+store.dispatch(fetchOffers());
+store.dispatch(fetchFavoriteOffers());
+store.dispatch(checkAuth());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

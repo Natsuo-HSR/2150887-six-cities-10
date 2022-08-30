@@ -1,17 +1,16 @@
-import { useAppSelector } from '../../hooks/useAppDispatch';
-import { AppSection, Offer } from '../../types/types';
+import { AppSection } from '../../constants/sections';
+import { Offer } from '../../types/types';
 import { OfferCard } from '../offer-card/offer-card';
 
 type OfferCardListProps = {
   section: AppSection;
+  offers: Offer[],
   onMouseOver?: (place: Offer) => void;
 }
 
-export const OfferCardList = ({ section, onMouseOver }: OfferCardListProps): JSX.Element => {
+export const OfferCardList = ({ section, offers, onMouseOver }: OfferCardListProps): JSX.Element => {
   // prepare styles
   const sectionStyle = getSectionStyle(section);
-
-  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className={sectionStyle}>
@@ -29,7 +28,7 @@ const getSectionStyle = (section: AppSection): string | undefined => {
     case AppSection.Favorites:
       sectionStyle = 'favorites__list';
       break;
-    case AppSection.Nearest:
+    case AppSection.Nearby:
       sectionStyle = 'near-places__list places__list';
       break;
   }

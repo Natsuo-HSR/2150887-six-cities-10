@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
-import { AppSection, Offer } from '../../types/types';
+import { Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
 import { Header } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { Spinner } from '../../components/spinner/spinner';
 import { useParams } from 'react-router-dom';
-import { loadCurrentOfferAction } from '../../store/actions';
+import { fetchCurrentOffer, fetchNearbyOffers, fetchReviews } from '../../store/api-actions';
+import { AppSection } from '../../constants/sections';
 
 
 export const PropertyPage = (): JSX.Element => {
@@ -19,12 +20,16 @@ export const PropertyPage = (): JSX.Element => {
   const urlParams = useParams();
 
   useEffect(() => {
-    dispatch(loadCurrentOfferAction(Number(urlParams.id)));
+    const offerId = Number(urlParams.id);
+    dispatch(fetchCurrentOffer(offerId));
+    dispatch(fetchReviews(offerId));
+    dispatch(fetchNearbyOffers(offerId));
   }, [urlParams.id]);
 
   const currentOffer = useAppSelector((state) => state.currentOffer);
   const isCurrentOfferLoaded = useAppSelector((state) => state.isCurrentOfferLoaded);
-
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const isNearbyOffersLoaded = useAppSelector((state) => state.isNearbyOffersLoaded);
 
   if (!isCurrentOfferLoaded) {
     return <Spinner />;
@@ -129,17 +134,19 @@ export const PropertyPage = (): JSX.Element => {
                   </p>
                 </div>
               </div>
-              {
-                currentOffer.reviews ? <ReviewSection reviews={currentOffer.reviews} /> : undefined
-              }
+              <ReviewSection />
             </div>
           </div>
-          <Map section={AppSection.Property} selectedOffer={selectedCard} />
+          {
+            isNearbyOffersLoaded ? <Map section={AppSection.Property} offers={nearbyOffers} selectedOffer={selectedCard} /> : <Spinner />
+          }
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferCardList section={AppSection.Nearest} onMouseOver={handleCardMouseOver} />
+            {
+              isNearbyOffersLoaded ? <OfferCardList section={AppSection.Nearby} offers={nearbyOffers} onMouseOver={handleCardMouseOver} /> : <Spinner />
+            }
           </section>
         </div>
       </main>

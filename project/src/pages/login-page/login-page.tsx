@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthorizationStatus } from '../../constants/api';
 import { AppRoutes } from '../../constants/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
-import { loginAction } from '../../store/api-actions';
+import { login } from '../../store/api-actions';
 import { AuthData } from '../../types/types';
 
 export const LoginPage = (): JSX.Element => {
@@ -16,7 +16,7 @@ export const LoginPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
+    dispatch(login(authData));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
