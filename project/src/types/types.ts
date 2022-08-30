@@ -3,7 +3,7 @@ export enum SortType {
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
-  DateNewToLow = 'Date: new to low',
+  DateByNew = 'Date: by new',
 }
 
 export enum SortOrder {

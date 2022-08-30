@@ -51,7 +51,7 @@ const sortByTopRating = (offers: Offer[]) => offers.sort((a, b) => b.rating - a.
 
 export const sortReviews = (reviews: Review[], sortType: SortType) => {
   switch(sortType) {
-    case SortType.DateNewToLow:
+    case SortType.DateByNew:
       return sortByDate(reviews, SortOrder.HighToLow);
     default:
       return reviews;

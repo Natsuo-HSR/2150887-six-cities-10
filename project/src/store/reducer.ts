@@ -91,7 +91,7 @@ export const updateStore = createReducer(initialState, (builder) => {
       state.isNearbyOffersLoaded = action.payload;
     })
     .addCase(setReviews, (state, action) => {
-      state.reviews = sortReviews(action.payload, SortType.DateNewToLow);
+      state.reviews = sortReviews(action.payload, SortType.DateByNew);
     })
     .addCase(setIsReviewsLoaded, (state, action) => {
       state.isReviewsLoaded = action.payload;
