@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, REVIEW_FORM_RATING } from '../../constants/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { getUserInfo } from '../../services/user-info';
@@ -6,6 +6,7 @@ import { postReview } from '../../store/api-actions';
 
 export const ReviewForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const formRef = useRef<HTMLFormElement>(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -23,22 +24,27 @@ export const ReviewForm = (): JSX.Element => {
 
   const onReviewFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(postReview({
-      id: currentOffer?.id || -1,
-      comment,
-      rating,
-      date: new Date().toDateString(),
-      user: {
-        id: userInfo.id,
-        name: userInfo.name,
-        isPro: userInfo.isPro,
-        avatarUrl: userInfo.avatarUrl,
-      },
-    }));
+    if (currentOffer) {
+      dispatch(postReview({
+        id: currentOffer.id,
+        comment,
+        rating,
+        date: new Date().toDateString(),
+        user: {
+          id: userInfo.id,
+          name: userInfo.name,
+          isPro: userInfo.isPro,
+          avatarUrl: userInfo.avatarUrl,
+        },
+      }));
+      setRating(0);
+      setComment('');
+      formRef.current?.reset();
+    }
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={(event) => onReviewFormSubmit(event)}>
+    <form ref={formRef} className="reviews__form form" action="#" method="post" onSubmit={(event) => onReviewFormSubmit(event)}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
@@ -54,7 +60,7 @@ export const ReviewForm = (): JSX.Element => {
           ))
         }
       </div>
-      <textarea className="reviews__textarea form__textarea" minLength={MIN_LENGTH_COMMENT} maxLength={MAX_LENGTH_COMMENT} id="review" name="review" onChange={handleTextChange} placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea className="reviews__textarea form__textarea" minLength={MIN_LENGTH_COMMENT} maxLength={MAX_LENGTH_COMMENT} id="review" name="review" onChange={handleTextChange} value={comment} placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
