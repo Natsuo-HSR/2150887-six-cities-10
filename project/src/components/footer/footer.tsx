@@ -1,11 +1,7 @@
-import { memo } from 'react';
-
-const Footer = (): JSX.Element => (
+export const Footer = (): JSX.Element => (
   <footer className="footer container">
     <a className="footer__logo-link" href="main.html">
       <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
     </a>
   </footer>
 );
-
-export const MemoizedFooter = memo(Footer);

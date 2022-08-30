@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { FavoriteList } from '../../components/favorite-list/favorite-list';
-import { MemoizedFooter } from '../../components/footer/footer';
+import { Footer } from '../../components/footer/footer';
 import { MemoizedHeader } from '../../components/header/header';
 import { Spinner } from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
@@ -28,7 +28,7 @@ export const FavoritesPage = (): JSX.Element => {
             </section>
           </div>
         </main>
-        <MemoizedFooter />
+        <Footer />
       </>
       :
       <Spinner />
