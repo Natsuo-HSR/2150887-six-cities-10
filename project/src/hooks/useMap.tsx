@@ -33,11 +33,11 @@ function useMap(
       isInitilized.current = true;
     }
 
-    return () => {
-      if (isInitilized.current && map !== null) {
-        map.remove();
-      }
-    };
+    // return () => {
+    //   if (isInitilized.current !== null && isInitilized.current && map !== null) {
+    //     map.remove();
+    //   }
+    // };
   }, [mapRef, map, city]);
 
   return map;

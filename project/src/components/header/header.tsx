@@ -1,10 +1,11 @@
 import { AuthorizationStatus } from '../../constants/api';
 import { useAppSelector } from '../../hooks/useAppDispatch';
+import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { SignIn } from '../sign-in/sign-in';
 import { SignOut } from '../sign-out/sign-out';
 
 export const Header = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   return (
     <header className="header">

@@ -1,14 +1,16 @@
 import { AuthorizationStatus } from '../../constants/api';
 import { useAppSelector } from '../../hooks/useAppDispatch';
+import { getIsReviewsLoaded, getReviews } from '../../store/data-process/data-selectors';
+import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { ReviewForm } from '../review-form/review-form';
 import { ReviewList } from '../review-list/review-list';
 import { Spinner } from '../spinner/spinner';
 
 
 export const ReviewSection = (): JSX.Element => {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviews);
-  const isReviewsLoaded = useAppSelector((state) => state.isReviewsLoaded);
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviews);
+  const isReviewsLoaded = useAppSelector(getIsReviewsLoaded);
 
   return (
     <section className="property__reviews reviews">

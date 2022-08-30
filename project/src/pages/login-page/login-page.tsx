@@ -4,10 +4,11 @@ import { AuthorizationStatus } from '../../constants/api';
 import { AppRoutes } from '../../constants/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { login } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { AuthData } from '../../types/types';
 
 export const LoginPage = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   const loginRef = useRef<HTMLInputElement | null>(null);

@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { filterOffersByCity } from '../../store/actions';
 import { fetchOffers } from '../../store/api-actions';
+import { setCity } from '../../store/offer-process/offer-process';
 import { City as CityType } from '../../types/types';
 
 type CityProps = {
@@ -12,8 +12,8 @@ export const City = ({ city, isActive }: CityProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleCityClick = (clickedCity: CityType) => {
+    dispatch(setCity(clickedCity));
     dispatch(fetchOffers());
-    dispatch(filterOffersByCity(clickedCity));
   };
 
   return (

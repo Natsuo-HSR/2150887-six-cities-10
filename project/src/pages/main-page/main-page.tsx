@@ -9,15 +9,16 @@ import { cities } from '../../constants/cities';
 import { AppSection } from '../../constants/sections';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 import { options } from '../../mocks/sort-options';
+import { getCity, getIsOffersLoaded, getOffers } from '../../store/offer-process/offer-selectors';
 import { Offer } from '../../types/types';
 
 export const MainPage = (): JSX.Element => {
   const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
   const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
 
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
-  const isOffersLoaded = useAppSelector((state) => state.isOffersLoaded);
+  const city = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
+  const isOffersLoaded = useAppSelector(getIsOffersLoaded);
 
   return (
     <div className="page page--gray page--main">

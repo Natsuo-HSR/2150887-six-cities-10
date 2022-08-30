@@ -9,9 +9,10 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 import { isCheckedAuth } from '../../utils/functions';
 import { Spinner } from '../spinner/spinner';
+import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 
 export const App = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (isCheckedAuth(authorizationStatus)) {
     return <Spinner />;
