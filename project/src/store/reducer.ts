@@ -1,18 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { City, Favorite, Offer, SortType } from './../types/types';
-import { findOfferById, getOffers } from './../utils/functions';
+import { City, Offer, SortType, Review } from './../types/types';
+import { getOffers } from './../utils/functions';
 import { paris } from '../constants/cities';
 import {
-  loadOffersAction,
-  loadOffersByCityAction,
-  sortOffersAction,
-  setErrorAction,
-  setIsOffersLoadedAction,
-  loadFavoritesAction,
-  clearErrorAction,
-  requireAuthorizationAction,
-  loadCurrentOfferAction,
-  setIsCurrentOfferLoadedAction,
+  setOffers,
+  filterOffersByCity,
+  sortOffers,
+  setError,
+  setIsOffersLoaded,
+  setFavoriteOffers,
+  clearError,
+  requireAuthorization,
+  setCurrentOffer,
+  setIsCurrentOfferLoaded,
+  setReviews,
+  setIsReviewsLoaded,
+  setIsFavoriteOffersLoaded,
+  setNearbyOffers,
+  setIsNearbyOffersLoaded,
 } from './actions';
 import { AuthorizationStatus } from '../constants/api';
 
@@ -20,9 +25,14 @@ type InitialState = {
   city: City,
   offers: Offer[],
   isOffersLoaded: boolean,
-  favorites: Favorite[];
-  currentOffer: Offer | undefined;
-  isCurrentOfferLoaded: boolean;
+  currentOffer: Offer | undefined,
+  isCurrentOfferLoaded: boolean,
+  favorites: Offer[],
+  isFavoritesLoaded: boolean,
+  nearbyOffers: Offer[],
+  isNearbyOffersLoaded: boolean,
+  reviews: Review[],
+  isReviewsLoaded: boolean,
   sortType: SortType,
   authorizationStatus: AuthorizationStatus,
   error: string | null,
@@ -31,10 +41,15 @@ type InitialState = {
 const initialState: InitialState = {
   city: paris,
   offers: [],
-  isOffersLoaded: false,
-  favorites: [],
   currentOffer: undefined,
   isCurrentOfferLoaded: false,
+  isOffersLoaded: false,
+  favorites: [],
+  isFavoritesLoaded: false,
+  nearbyOffers: [],
+  isNearbyOffersLoaded: false,
+  reviews: [],
+  isReviewsLoaded: false,
   sortType: SortType.Popular,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
@@ -42,38 +57,52 @@ const initialState: InitialState = {
 
 export const updateStore = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadOffersByCityAction, (state, action) => {
+    .addCase(filterOffersByCity, (state, action) => {
       state.isOffersLoaded = false;
       state.city = action.payload;
       state.offers = getOffers(state.offers, state.city, state.sortType);
     })
-    .addCase(sortOffersAction, (state, action) => {
+    .addCase(sortOffers, (state, action) => {
       state.sortType = action.payload;
       state.offers = getOffers(state.offers, state.city, state.sortType);
     })
-    .addCase(loadOffersAction, (state, action) => {
+    .addCase(setOffers, (state, action) => {
       state.offers = getOffers(action.payload, state.city, state.sortType);
     })
-    .addCase(setIsOffersLoadedAction, (state, action) => {
+    .addCase(setIsOffersLoaded, (state, action) => {
       state.isOffersLoaded = action.payload;
     })
-    .addCase(loadFavoritesAction, (state, action) => {
-      state.favorites = action.payload;
+    .addCase(setCurrentOffer, (state, action) => {
+      state.currentOffer = action.payload;
     })
-    .addCase(loadCurrentOfferAction, (state, action) => {
-      state.currentOffer = findOfferById(state.offers, action.payload);
-      state.isCurrentOfferLoaded = true;
-    })
-    .addCase(setIsCurrentOfferLoadedAction, (state, action) => {
+    .addCase(setIsCurrentOfferLoaded, (state, action) => {
       state.isCurrentOfferLoaded = action.payload;
     })
-    .addCase(setErrorAction, (state, action) => {
+    .addCase(setFavoriteOffers, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(setIsFavoriteOffersLoaded, (state, action) => {
+      state.isFavoritesLoaded = action.payload;
+    })
+    .addCase(setNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(setIsNearbyOffersLoaded, (state, action) => {
+      state.isNearbyOffersLoaded = action.payload;
+    })
+    .addCase(setReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setIsReviewsLoaded, (state, action) => {
+      state.isReviewsLoaded = action.payload;
+    })
+    .addCase(setError, (state, action) => {
       state.error = action.payload;
     })
-    .addCase(clearErrorAction, (state) => {
+    .addCase(clearError, (state) => {
       state.error = null;
     })
-    .addCase(requireAuthorizationAction, (state, action) => {
+    .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     });
 });

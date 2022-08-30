@@ -6,9 +6,10 @@ import { OfferCardList } from '../../components/offer-card-list/offer-card-list'
 import { OffersSorting } from '../../components/offers-sorting/offers-sorting';
 import { Spinner } from '../../components/spinner/spinner';
 import { cities } from '../../constants/cities';
+import { AppSection } from '../../constants/sections';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 import { options } from '../../mocks/sort-options';
-import { AppSection, Offer } from '../../types/types';
+import { Offer } from '../../types/types';
 
 export const MainPage = (): JSX.Element => {
   const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
@@ -31,10 +32,10 @@ export const MainPage = (): JSX.Element => {
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offers.length} places to stay in {city.name}</b>
                   <OffersSorting options={options} />
-                  <OfferCardList section={AppSection.Main} onMouseOver={handleCardMouseOver} />
+                  <OfferCardList section={AppSection.Main} offers={offers} onMouseOver={handleCardMouseOver} />
                 </section>
                 <div className="cities__right-section">
-                  <Map section={AppSection.Main} selectedOffer={selectedCard} />
+                  <Map section={AppSection.Main} offers={offers} selectedOffer={selectedCard} />
                 </div>
               </div>
             </div>

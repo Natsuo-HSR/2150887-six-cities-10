@@ -1,10 +1,3 @@
-export enum AppSection {
-  Main = 'cities',
-  Favorites = 'favorites',
-  Nearest = 'near',
-  Property = 'property',
-}
-
 export enum SortType {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
@@ -35,21 +28,14 @@ export type Offer = {
   description: string;
   location: Location;
   bookmarked?: boolean;
-  reviews?: Review[];
-}
-
-export type Favorite = {
-  cityName: string,
-  offers: Offer[];
 }
 
 export type Review = {
   id: number;
-  userName: string;
   rating: number;
-  text: string;
-  dateTime: string;
-  formattedDate: string;
+  comment: string;
+  date: string;
+  user: Host;
 }
 
 export type City = {
@@ -66,7 +52,7 @@ export type Location = {
 export type Host = {
   id: number
   name: string;
-  sPro: boolean;
+  isPro: boolean;
   avatarUrl: string;
 }
 

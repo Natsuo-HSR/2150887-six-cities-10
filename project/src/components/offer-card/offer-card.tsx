@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { AppSection, Offer } from '../../types/types';
+import { AppSection } from '../../constants/sections';
+import { Offer } from '../../types/types';
 
 type OfferCardProps = {
   section: AppSection;
@@ -72,7 +73,7 @@ const getSectionStyle = (section: AppSection): string => {
     case AppSection.Favorites:
       sectionStyles = 'favorites';
       break;
-    case AppSection.Nearest:
+    case AppSection.Nearby:
       sectionStyles = 'near-places';
       break;
   }
@@ -94,7 +95,7 @@ const getImageSizes = (section: AppSection) => {
         height: '110',
       };
       break;
-    case AppSection.Nearest:
+    case AppSection.Nearby:
       imageSizes = {
         width: '260',
         height: '200',

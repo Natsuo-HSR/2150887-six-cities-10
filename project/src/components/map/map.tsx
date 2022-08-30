@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Icon, Marker } from 'leaflet';
+import L, { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import { AppSection, Offer } from '../../types/types';
+import { Offer } from '../../types/types';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks/useAppDispatch';
+import { AppSection } from '../../constants/sections';
 
 const defaultIcon = new Icon({
   iconUrl: 'img/pin.svg',
@@ -20,12 +21,12 @@ const selectedIconOrange = new Icon({
 
 type MapProps = {
   section: AppSection;
+  offers: Offer[];
   selectedOffer?: Offer | null;
 };
 
-export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
+export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element => {
   const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -38,6 +39,12 @@ export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
           lng: place.location.longitude
         });
 
+        marker.setIcon(
+          selectedOffer !== null && place.id === selectedOffer?.id
+            ? selectedIconOrange
+            : defaultIcon
+        );
+
         marker
           .setIcon(
             selectedOffer !== null && place.id === selectedOffer?.id
@@ -46,6 +53,9 @@ export const Map = ({ section, selectedOffer }: MapProps): JSX.Element => {
           )
           .addTo(map);
       });
+      return () => {
+        map.eachLayer((l) => l instanceof L.Marker ? map.removeLayer(l) : '');
+      };
     }
   }, [map, offers, selectedOffer]);
 

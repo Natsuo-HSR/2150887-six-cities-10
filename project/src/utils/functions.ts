@@ -14,6 +14,16 @@ export const getOffers = (offers: Offer[], city: City, sortType: SortType): Offe
   return sortOffers(filteredOffers, sortType);
 };
 
+export const getFormattedDate = (date: string) => {
+  const dateObj = new Date(date);
+  return `${dateObj.getFullYear()}-${dateObj.getMonth()}-${dateObj.getDate()}`;
+};
+
+export const getMonthAndYear = (date: string) => {
+  const dateObj = new Date(date);
+  return `${dateObj.toLocaleString('en-us', { month: 'long' })} ${dateObj.getFullYear()}`;
+};
+
 const sortOffers = (offers: Offer[], sortType: SortType): Offer[] => {
   switch (sortType) {
     case SortType.Popular:

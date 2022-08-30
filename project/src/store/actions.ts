@@ -1,30 +1,20 @@
 import { createAction } from '@reduxjs/toolkit';
+import { AuthorizationStatus } from '../constants/api';
+import { City, Offer, Review, SortType, UserInfo } from '../types/types';
 
-export const Action = {
-  LOAD_OFFERS_BY_CITY: 'LOAD_OFFERS_BY_CITY',
-  SORT_OFFERS: 'SORT_OFFERS',
-  LOAD_OFFERS: 'LOAD_OFFERS',
-  SET_IS_OFFERS_LOADED: 'SET_IS_OFFERS_LOADED',
-  LOAD_FAVORITES: 'LOAD_FAVORITES',
-  LOAD_CURRENT_OFFER: 'LOAD_CURRENT_OFFER',
-  SET_IS_CURRENT_OFFER_LOADED: 'SET_IS_CURRENT_OFFER_LOADED',
-  REQUIRE_AUTHORIZATION: 'REQUIRE_AUTHORIZATION',
-  LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT',
-  CHECK_AUTHORIZATION: 'CHECK_AUTHORIZATION',
-  SET_USER_PROFILE: 'SET_USER_PROFILE',
-  SET_ERROR: 'SET_ERROR',
-  CLEAR_ERROR: 'CLEAR_ERROR'
-};
-
-export const loadOffersByCityAction = createAction(Action.LOAD_OFFERS_BY_CITY, (value) => ({ payload: value }));
-export const sortOffersAction = createAction(Action.SORT_OFFERS, (value) => ({ payload: value }));
-export const loadOffersAction = createAction(Action.LOAD_OFFERS, (value) => ({ payload: value }));
-export const setIsOffersLoadedAction = createAction(Action.SET_IS_OFFERS_LOADED, (value) => ({ payload: value }));
-export const loadFavoritesAction = createAction(Action.LOAD_FAVORITES, (value) => ({ payload: value }));
-export const loadCurrentOfferAction = createAction(Action.LOAD_CURRENT_OFFER, (value) => ({ payload: value }));
-export const setIsCurrentOfferLoadedAction = createAction(Action.SET_IS_CURRENT_OFFER_LOADED, (value) => ({ payload: value }));
-export const requireAuthorizationAction = createAction(Action.REQUIRE_AUTHORIZATION, (value) => ({ payload: value }));
-export const setUserInfoAction = createAction(Action.SET_USER_PROFILE, (value) => ({ payload: value }));
-export const setErrorAction = createAction(Action.SET_ERROR, (value) => ({ payload: value }));
-export const clearErrorAction = createAction(Action.CLEAR_ERROR);
+export const setOffers = createAction<Offer[]>('data/setOffers');
+export const setIsOffersLoaded = createAction<boolean>('data/setIsOffersLoaded');
+export const filterOffersByCity = createAction<City>('data/filterOffersByCity');
+export const sortOffers = createAction<SortType>('data/sortOffers');
+export const setReviews = createAction<Review[]>('data/setReviews');
+export const setIsReviewsLoaded = createAction<boolean>('data/setIsReviewsLoaded');
+export const setFavoriteOffers = createAction<Offer[]>('data/setFavoriteOffers');
+export const setIsFavoriteOffersLoaded = createAction<boolean>('data/setIsFavoriteOffersLoaded');
+export const setNearbyOffers = createAction<Offer[]>('data/setNearbyOffers');
+export const setIsNearbyOffersLoaded = createAction<boolean>('data/setIsNearbyOffersLoaded');
+export const setCurrentOffer = createAction<Offer | undefined>('data/setCurrentOffer');
+export const setIsCurrentOfferLoaded = createAction<boolean>('data/setIsCurrentOfferLoaded');
+export const setError = createAction<string | null>('data/setError');
+export const clearError = createAction('data/clearError');
+export const requireAuthorization = createAction<AuthorizationStatus>('auth/requireAuthorization');
+export const setUserInfo = createAction<UserInfo>('auth/setUserInfo');

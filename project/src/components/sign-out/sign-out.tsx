@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../constants/routes';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getUserInfo } from '../../services/user-info';
-import { logoutAction } from '../../store/api-actions';
+import { logout } from '../../store/api-actions';
 
 export const SignOut = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ export const SignOut = (): JSX.Element => {
 
   const handleSignOutClick = (event: React.MouseEvent<Element, MouseEvent>) => {
     event.preventDefault();
-    dispatch(logoutAction());
+    dispatch(logout());
   };
 
   return (
