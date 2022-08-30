@@ -10,7 +10,7 @@ export enum APIRoutes {
   CurrentOffer = '/hotels/{hotelId}',
   Nearby = '/hotels/{hotelId}/nearby',
   Reviews = '/comments/{hotelId}',
-  Favorites = '/favorite/',
+  Favorites = '/favorite',
   Login = '/login',
   Logout = '/logout',
 }

@@ -39,12 +39,6 @@ export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element =
           lng: place.location.longitude
         });
 
-        marker.setIcon(
-          selectedOffer !== null && place.id === selectedOffer?.id
-            ? selectedIconOrange
-            : defaultIcon
-        );
-
         marker
           .setIcon(
             selectedOffer !== null && place.id === selectedOffer?.id
