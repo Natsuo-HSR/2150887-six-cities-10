@@ -3,7 +3,7 @@ import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
 import { Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
-import { Header } from '../../components/header/header';
+import { MemoizedHeader } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { Spinner } from '../../components/spinner/spinner';
@@ -46,7 +46,7 @@ export const PropertyPage = (): JSX.Element => {
 
   return (
     <>
-      <Header />
+      <MemoizedHeader />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

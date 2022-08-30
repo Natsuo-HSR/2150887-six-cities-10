@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FavoriteList } from '../../components/favorite-list/favorite-list';
-import { Footer } from '../../components/footer/footer';
-import { Header } from '../../components/header/header';
+import { MemoizedFooter } from '../../components/footer/footer';
+import { MemoizedHeader } from '../../components/header/header';
 import { Spinner } from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { fetchFavoriteOffers } from '../../store/api-actions';
@@ -19,7 +19,7 @@ export const FavoritesPage = (): JSX.Element => {
   return (
     isFavoritesLoaded ?
       <>
-        <Header />
+        <MemoizedHeader />
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
             <section className="favorites">
@@ -28,7 +28,7 @@ export const FavoritesPage = (): JSX.Element => {
             </section>
           </div>
         </main>
-        <Footer />
+        <MemoizedFooter />
       </>
       :
       <Spinner />

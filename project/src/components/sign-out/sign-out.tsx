@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../constants/routes';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -33,3 +34,5 @@ export const SignOut = (): JSX.Element => {
     </>
   );
 };
+
+export const MemoizedSignOut = memo(SignOut);
