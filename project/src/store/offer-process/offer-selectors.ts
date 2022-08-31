@@ -17,3 +17,4 @@ export const getIsNearbyOffersLoaded = (state: State): boolean => state[NameSpac
 export const getFavorites = (state: State): Offer[] => state[NameSpace.Offer].favorites;
 export const getIsFavoritesLoaded = (state: State): boolean => state[NameSpace.Offer].isFavoritesLoaded;
 
+export const getIsNeedToReload = (state: State): boolean => state[NameSpace.Offer].isNeedToReload;

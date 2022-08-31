@@ -7,10 +7,11 @@ export enum AppRoutes {
 
 export enum APIRoutes {
   Offers = '/hotels',
-  OfferById = '/hotels/{hotelId}',
-  Nearby = '/hotels/{hotelId}/nearby',
-  Reviews = '/comments/{hotelId}',
+  OfferById = '/hotels/{offerId}',
+  Nearby = '/hotels/{offerId}/nearby',
+  Reviews = '/comments/{offerId}',
   Favorites = '/favorite',
+  PutFavorite = '/favorite/{offerId}/{status}',
   Login = '/login',
   Logout = '/logout',
 }
