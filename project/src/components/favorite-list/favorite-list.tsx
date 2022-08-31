@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { AppSection } from '../../constants/sections';
 import { useAppSelector } from '../../hooks/useAppDispatch';
+import { getFavorites } from '../../store/offer-process/offer-selectors';
 import { Offer } from '../../types/types';
 import { OfferCard } from '../offer-card/offer-card';
 
 export const FavoriteList = (): JSX.Element => {
-  const favorites = useAppSelector((state) => state.favorites);
+  const favorites = useAppSelector(getFavorites);
   const [, setActiveCard] = useState<null | Offer>(null);
   const handleCardMouseOver = (offer: Offer) => setActiveCard(offer);
 

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
-import { sortOffers } from '../../store/actions';
+import { sortOffers } from '../../store/offer-process/offer-process';
+import { getSortType } from '../../store/offer-process/offer-selectors';
 import { SortType } from '../../types/types';
 
 type OffersSoringType = {
@@ -10,12 +11,14 @@ type OffersSoringType = {
 export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
   const [isOpened, setIsOpened] = useState(false);
   const dispatch = useAppDispatch();
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
 
   const handleSortChange = (option: SortType) => {
     dispatch(sortOffers(option));
     setIsOpened(false);
   };
+  // eslint-disable-next-line no-console
+  console.log('SORTING RERENDERED!');
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -42,3 +45,5 @@ export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
     </form>
   );
 };
+
+export const MemoizedOffersSorting = memo(OffersSorting);

@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
-import Leaflet, { Icon, Marker } from 'leaflet';
+import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { Offer } from '../../types/types';
 import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 import { AppSection } from '../../constants/sections';
+import { getCity } from '../../store/offer-process/offer-selectors';
 
 const defaultIcon = new Icon({
   iconUrl: 'img/pin.svg',
@@ -26,7 +27,7 @@ type MapProps = {
 };
 
 export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element => {
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector(getCity);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -47,9 +48,6 @@ export const Map = ({ section, offers, selectedOffer }: MapProps): JSX.Element =
           )
           .addTo(map);
       });
-      return () => {
-        map.eachLayer((layer) => layer instanceof Leaflet.Marker ? map.removeLayer(layer) : '');
-      };
     }
   }, [map, offers, selectedOffer]);
 

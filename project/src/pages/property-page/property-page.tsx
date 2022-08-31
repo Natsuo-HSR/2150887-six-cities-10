@@ -3,13 +3,14 @@ import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
 import { Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
-import { Header } from '../../components/header/header';
+import { MemoizedHeader } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { Spinner } from '../../components/spinner/spinner';
 import { useParams } from 'react-router-dom';
-import { fetchCurrentOffer, fetchNearbyOffers, fetchReviews } from '../../store/api-actions';
+import { fetchOfferById, fetchNearbyOffers, fetchReviews } from '../../store/api-actions';
 import { AppSection } from '../../constants/sections';
+import { getCurrentOffer, getIsCurrentOfferLoaded, getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/offer-process/offer-selectors';
 
 
 export const PropertyPage = (): JSX.Element => {
@@ -21,15 +22,15 @@ export const PropertyPage = (): JSX.Element => {
 
   useEffect(() => {
     const offerId = Number(urlParams.id);
-    dispatch(fetchCurrentOffer(offerId));
+    dispatch(fetchOfferById(offerId));
     dispatch(fetchReviews(offerId));
     dispatch(fetchNearbyOffers(offerId));
   }, [urlParams.id]);
 
-  const currentOffer = useAppSelector((state) => state.currentOffer);
-  const isCurrentOfferLoaded = useAppSelector((state) => state.isCurrentOfferLoaded);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const isNearbyOffersLoaded = useAppSelector((state) => state.isNearbyOffersLoaded);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const isCurrentOfferLoaded = useAppSelector(getIsCurrentOfferLoaded);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
 
   if (!isCurrentOfferLoaded) {
     return <Spinner />;
@@ -45,7 +46,7 @@ export const PropertyPage = (): JSX.Element => {
 
   return (
     <>
-      <Header />
+      <MemoizedHeader />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

@@ -3,6 +3,8 @@ import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, REVIEW_FORM_RATING } from '../.
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { getUserInfo } from '../../services/user-info';
 import { postReview } from '../../store/api-actions';
+import { getIsReviewsLoaded } from '../../store/data-process/data-selectors';
+import { getCurrentOffer } from '../../store/offer-process/offer-selectors';
 
 export const ReviewForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -10,7 +12,7 @@ export const ReviewForm = (): JSX.Element => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const isReviewsLoaded = useAppSelector((state) => state.isReviewsLoaded);
+  const isReviewsLoaded = useAppSelector(getIsReviewsLoaded);
 
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => setRating(Number(event.target.value));
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setComment(event.target.value);
@@ -19,7 +21,7 @@ export const ReviewForm = (): JSX.Element => {
     setIsButtonDisabled(!(comment.length >= MIN_LENGTH_COMMENT && rating >= 1));
   }, [rating, comment]);
 
-  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const currentOffer = useAppSelector(getCurrentOffer);
   const userInfo = getUserInfo();
 
   const onReviewFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {

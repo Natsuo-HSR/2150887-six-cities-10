@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks/useAppDispatch';
+import { getCity } from '../../store/offer-process/offer-selectors';
 import { City as CityType } from '../../types/types';
 import { City } from '../city/city';
 
@@ -7,7 +8,7 @@ type CitiesProps = {
 };
 
 export const Cities = ({ cities }: CitiesProps): JSX.Element => {
-  const choosedCity = useAppSelector((state) => state.city);
+  const choosedCity = useAppSelector(getCity);
 
   return (
     <>
