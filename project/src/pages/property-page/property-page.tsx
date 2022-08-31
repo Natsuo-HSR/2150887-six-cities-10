@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { NotFoundPage } from '../not-fount-page/not-found-page';
 import { ReviewSection } from '../../components/review-section/review-section';
-import { Offer } from '../../types/types';
 import { Map } from '../../components/map/map';
 import { MemoizedHeader } from '../../components/header/header';
 import { OfferCardList } from '../../components/offer-card-list/offer-card-list';
@@ -17,8 +16,6 @@ import { setIsNeedToReload } from '../../store/offer-process/offer-process';
 
 export const PropertyPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
-  const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
 
   const urlParams = useParams();
 
@@ -54,7 +51,7 @@ export const PropertyPage = (): JSX.Element => {
     return <NotFoundPage />;
   }
 
-  const { isPremium, images, price, rating, description, type, maxAdults, bedrooms, goods, id, isFavorite } = currentOffer;
+  const { isPremium, title, images, price, rating, description, type, maxAdults, bedrooms, goods, id, isFavorite, host } = currentOffer;
 
   const slicedImages = images.slice(0, 6);
 
@@ -85,7 +82,7 @@ export const PropertyPage = (): JSX.Element => {
                   null
               }
               <div className="property__name-wrapper">
-                <h1 className="property__name">{description}</h1>
+                <h1 className="property__name">{title}</h1>
                 <BookmarkButton offerId={id} isFavorite={isFavorite} section={AppSection.Property} />
               </div>
               <div className="property__rating rating">
@@ -125,22 +122,17 @@ export const PropertyPage = (): JSX.Element => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : '' } user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                    {host.name}
                   </span>
-                  <span className="property__user-status">
-                    Pro
-                  </span>
+                  {host.isPro ? <span className="property__user-status">Pro</span> : undefined}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
@@ -148,14 +140,14 @@ export const PropertyPage = (): JSX.Element => {
             </div>
           </div>
           {
-            isNearbyOffersLoaded ? <Map section={AppSection.Property} offers={nearbyOffers} selectedOffer={selectedCard} /> : <Spinner />
+            isNearbyOffersLoaded ? <Map section={AppSection.Property} offers={[currentOffer, ...nearbyOffers]} selectedOffer={currentOffer} /> : <Spinner />
           }
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             {
-              isNearbyOffersLoaded ? <OfferCardList section={AppSection.Nearby} offers={nearbyOffers} onMouseOver={handleCardMouseOver} /> : <Spinner />
+              isNearbyOffersLoaded ? <OfferCardList section={AppSection.Nearby} offers={nearbyOffers} /> : <Spinner />
             }
           </section>
         </div>

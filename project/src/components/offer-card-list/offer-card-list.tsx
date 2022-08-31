@@ -6,15 +6,16 @@ type OfferCardListProps = {
   section: AppSection;
   offers: Offer[],
   onMouseOver?: (place: Offer) => void;
+  onMouseOut?: (place: Offer) => void;
 }
 
-export const OfferCardList = ({ section, offers, onMouseOver }: OfferCardListProps): JSX.Element => {
+export const OfferCardList = ({ section, offers, onMouseOver, onMouseOut }: OfferCardListProps): JSX.Element => {
   // prepare styles
   const sectionStyle = getSectionStyle(section);
 
   return (
     <div className={sectionStyle}>
-      { offers.map((offer) => <OfferCard section={section} key={offer.id} offer={offer} onMouseOver={onMouseOver ? onMouseOver : undefined} />) }
+      { offers.map((offer) => <OfferCard section={section} key={offer.id} offer={offer} onMouseOver={onMouseOver} onMouseOut={onMouseOut} />) }
     </div>
   );
 };

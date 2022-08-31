@@ -19,6 +19,8 @@ export const MainPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [selectedCard, setSelectedCard] = useState<null | Offer>(null);
   const handleCardMouseOver = (offer: Offer) => setSelectedCard(offer);
+  const handleCardMouseOut = (offer: Offer) => setSelectedCard(null);
+
 
   const city = useAppSelector(getCity);
   const offers = useAppSelector(getOffers);
@@ -47,7 +49,7 @@ export const MainPage = (): JSX.Element => {
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offers.length} places to stay in {city.name}</b>
                   <MemoizedOffersSorting options={options} />
-                  <OfferCardList section={AppSection.Main} offers={offers} onMouseOver={handleCardMouseOver} />
+                  <OfferCardList section={AppSection.Main} offers={offers} onMouseOver={handleCardMouseOver} onMouseOut={handleCardMouseOut} />
                 </section>
                 <div className="cities__right-section">
                   <Map section={AppSection.Main} offers={offers} selectedOffer={selectedCard} />

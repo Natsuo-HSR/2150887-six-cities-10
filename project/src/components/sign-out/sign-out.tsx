@@ -19,11 +19,11 @@ export const SignOut = (): JSX.Element => {
   return (
     <>
       <li className="header__nav-item user">
-        <a className="header__nav-link header__nav-link--profile" href="#todo">
+        <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.Favorites}>
           <img className="header__avatar-wrapper user__avatar-wrapper" src={avatarUrl} alt="no image"></img>
           <span className="header__user-name user__name">{email}</span>
           <span className="header__favorite-count">{favorites.length}</span>
-        </a>
+        </Link>
       </li>
       <li className="header__nav-item">
         <Link
