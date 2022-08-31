@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppSection } from '../../constants/sections';
 import { Offer } from '../../types/types';
+import { BookmarkButton } from '../bookmark-button/bookmark-button';
 
 type OfferCardProps = {
   section: AppSection;
@@ -13,7 +14,7 @@ export const OfferCard = ({
   offer,
   onMouseOver,
 }: OfferCardProps): JSX.Element => {
-  const {id, isPremium, previewImage, bookmarked, price, rating, title, type} = offer;
+  const {id, isPremium, previewImage, isFavorite, price, rating, title, type} = offer;
 
   // prepare styles
   const imageSizes = getImageSizes(section);
@@ -40,12 +41,7 @@ export const OfferCard = ({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${bookmarked ? 'place-card__bookmark-button--active' : ''} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton offerId={offer.id} isFavorite={isFavorite} section={section} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -65,42 +61,34 @@ export const OfferCard = ({
 };
 
 const getSectionStyle = (section: AppSection): string => {
-  let sectionStyles = '';
   switch(section) {
     case AppSection.Main:
-      sectionStyles = 'cities';
-      break;
+      return 'cities';
     case AppSection.Favorites:
-      sectionStyles = 'favorites';
-      break;
+      return 'favorites';
     case AppSection.Nearby:
-      sectionStyles = 'near-places';
-      break;
+      return 'near-places';
+    default:
+      return 'cities';
   }
-  return sectionStyles;
 };
 
 const getImageSizes = (section: AppSection) => {
-  let imageSizes;
   switch(section) {
     case AppSection.Main:
-      imageSizes = {
+      return {
         width: '260',
         height: '200',
       };
-      break;
     case AppSection.Favorites:
-      imageSizes = {
+      return {
         width: '150',
         height: '110',
       };
-      break;
     case AppSection.Nearby:
-      imageSizes = {
+      return {
         width: '260',
         height: '200',
       };
-      break;
   }
-  return imageSizes;
 };

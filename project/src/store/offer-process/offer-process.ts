@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { fetchOfferById, fetchNearbyOffers, fetchFavoriteOffers } from './../api-actions';
+import { fetchOfferById, fetchNearbyOffers, fetchFavoriteOffers, putFavoriteOffer } from './../api-actions';
 import { getOffers } from './../../utils/functions';
 import { NameSpace } from '../../constants/namespaces';
 import { OfferProcess } from '../../types/state';
@@ -18,10 +18,13 @@ export const initialState: OfferProcess = {
   isNearbyOffersLoaded: false,
   favorites: [],
   isFavoritesLoaded: false,
+  isNeedToReload: false,
 };
 
 export const setCity = createAction<City>('offer/setCity');
 export const sortOffers = createAction<SortType>('offer/sortOffers');
+
+export const setIsNeedToReload = createAction<boolean>('offer/setIsNeedToReload');
 
 export const offerProcess = createSlice({
   name: NameSpace.Offer,
@@ -29,6 +32,9 @@ export const offerProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(setIsNeedToReload, (state, action) => {
+        state.isNeedToReload = action.payload;
+      })
       .addCase(setCity, (state, action) => {
         state.city = action.payload;
       })
@@ -69,6 +75,9 @@ export const offerProcess = createSlice({
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
         state.favorites = action.payload;
         state.isFavoritesLoaded = true;
+      })
+      .addCase(putFavoriteOffer.fulfilled, (state) => {
+        state.isNeedToReload = true;
       });
   }
 });

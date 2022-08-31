@@ -17,8 +17,6 @@ export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
     dispatch(sortOffers(option));
     setIsOpened(false);
   };
-  // eslint-disable-next-line no-console
-  console.log('SORTING RERENDERED!');
 
   return (
     <form className="places__sorting" action="#" method="get">
