@@ -6,8 +6,7 @@ import { MemoizedHeader } from '../../components/header/header';
 import { Spinner } from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { fetchFavoriteOffers } from '../../store/api-actions';
-import { setIsNeedToReload } from '../../store/offer-process/offer-process';
-import { getFavorites, getIsFavoritesLoaded, getIsNeedToReload } from '../../store/offer-process/offer-selectors';
+import { getFavorites, getIsFavoritesLoaded } from '../../store/offer-process/offer-selectors';
 
 
 export const FavoritesPage = (): JSX.Element => {
@@ -18,15 +17,6 @@ export const FavoritesPage = (): JSX.Element => {
 
   const favorites = useAppSelector(getFavorites);
   const isFavoritesLoaded = useAppSelector(getIsFavoritesLoaded);
-
-  const isNeedToReload = useAppSelector(getIsNeedToReload);
-
-  useEffect(() => {
-    if (isNeedToReload) {
-      dispatch(fetchFavoriteOffers());
-      dispatch(setIsNeedToReload(false));
-    }
-  }, [isNeedToReload]);
 
   const citiesSet = new Set(favorites.map((fav) => fav.city.name));
 

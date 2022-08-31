@@ -7,11 +7,10 @@ import { OfferCardList } from '../../components/offer-card-list/offer-card-list'
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
 import { Spinner } from '../../components/spinner/spinner';
 import { useParams } from 'react-router-dom';
-import { fetchOfferById, fetchNearbyOffers, fetchReviews, fetchFavoriteOffers } from '../../store/api-actions';
+import { fetchOfferById, fetchNearbyOffers, fetchReviews } from '../../store/api-actions';
 import { AppSection } from '../../constants/sections';
-import { getCurrentOffer, getIsCurrentOfferLoaded, getIsNearbyOffersLoaded, getIsNeedToReload, getNearbyOffers } from '../../store/offer-process/offer-selectors';
+import { getCurrentOffer, getIsCurrentOfferLoaded, getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/offer-process/offer-selectors';
 import { BookmarkButton } from '../../components/bookmark-button/bookmark-button';
-import { setIsNeedToReload } from '../../store/offer-process/offer-process';
 
 
 export const PropertyPage = (): JSX.Element => {
@@ -30,18 +29,6 @@ export const PropertyPage = (): JSX.Element => {
   const isCurrentOfferLoaded = useAppSelector(getIsCurrentOfferLoaded);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
-  const isNeedToReload = useAppSelector(getIsNeedToReload);
-
-  useEffect(() => {
-    if (isNeedToReload) {
-      const offerId = Number(urlParams.id);
-      dispatch(fetchOfferById(offerId));
-      dispatch(fetchReviews(offerId));
-      dispatch(fetchNearbyOffers(offerId));
-      dispatch(fetchFavoriteOffers());
-      dispatch(setIsNeedToReload(false));
-    }
-  }, [isNeedToReload]);
 
   if (!isCurrentOfferLoaded) {
     return <Spinner />;

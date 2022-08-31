@@ -18,13 +18,10 @@ export const initialState: OfferProcess = {
   isNearbyOffersLoaded: false,
   favorites: [],
   isFavoritesLoaded: false,
-  isNeedToReload: false,
 };
 
 export const setCity = createAction<City>('offer/setCity');
 export const sortOffers = createAction<SortType>('offer/sortOffers');
-
-export const setIsNeedToReload = createAction<boolean>('offer/setIsNeedToReload');
 
 export const offerProcess = createSlice({
   name: NameSpace.Offer,
@@ -32,9 +29,6 @@ export const offerProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(setIsNeedToReload, (state, action) => {
-        state.isNeedToReload = action.payload;
-      })
       .addCase(setCity, (state, action) => {
         state.city = action.payload;
       })
@@ -76,8 +70,41 @@ export const offerProcess = createSlice({
         state.favorites = action.payload;
         state.isFavoritesLoaded = true;
       })
-      .addCase(putFavoriteOffer.fulfilled, (state) => {
-        state.isNeedToReload = true;
+      .addCase(putFavoriteOffer.fulfilled, (state, action) => {
+        const modifiedOffer = action.payload;
+        // update current offer
+        if (state.currentOffer && state.currentOffer.id === modifiedOffer.id) {
+          state.isCurrentOfferLoaded = false;
+          state.currentOffer = modifiedOffer;
+          state.isCurrentOfferLoaded = true;
+        }
+
+        // update favorites
+        state.isFavoritesLoaded = false;
+        if (modifiedOffer.isFavorite) {
+          state.favorites.push(modifiedOffer);
+        } else {
+          state.favorites = state.favorites.filter((favorite) => favorite.id !== modifiedOffer.id);
+        }
+        state.isFavoritesLoaded = true;
+
+        // update offers
+        const oldOffer = state.offers.find((offer) => offer.id === modifiedOffer.id);
+        if (oldOffer) {
+          state.isOffersLoaded = false;
+          const updatedOffers = state.offers.map((offer) => offer.id === modifiedOffer.id ? modifiedOffer : offer);
+          state.offers = getOffers(updatedOffers, state.city, state.sortType);
+          state.isOffersLoaded = true;
+        }
+
+        // update nearby
+        const oldNearby = state.nearbyOffers.find((offer) => offer.id === modifiedOffer.id);
+        if (oldNearby) {
+          state.isNearbyOffersLoaded = false;
+          const updatedNearby = state.nearbyOffers.map((offer) => offer.id === modifiedOffer.id ? modifiedOffer : offer);
+          state.nearbyOffers = updatedNearby;
+          state.isNearbyOffersLoaded = true;
+        }
       });
   }
 });
