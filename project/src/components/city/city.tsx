@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchOffers } from '../../store/api-actions';
 import { setCity } from '../../store/offer-process/offer-process';
@@ -18,9 +19,9 @@ export const City = ({ city, isActive }: CityProps): JSX.Element => {
 
   return (
     <li className="locations__item" onClick={() => handleCityClick(city)}>
-      <a className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} href="#todo">
+      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to="#">
         <span>{city.name}</span>
-      </a>
+      </Link>
     </li>
   );
 };

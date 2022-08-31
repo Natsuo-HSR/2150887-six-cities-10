@@ -23,7 +23,6 @@ export type OfferProcess = {
   isFavoritesLoaded: boolean,
   nearbyOffers: Offer[],
   isNearbyOffersLoaded: boolean,
-  isNeedToReload: boolean,
 };
 
 export type State = ReturnType<typeof store.getState>;

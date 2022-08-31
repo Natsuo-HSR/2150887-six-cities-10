@@ -28,7 +28,6 @@ export type Offer = {
   host: Host;
   description: string;
   location: Location;
-  bookmarked?: boolean;
 }
 
 export type Review = {

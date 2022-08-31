@@ -7,12 +7,14 @@ type OfferCardProps = {
   section: AppSection;
   offer: Offer;
   onMouseOver?: (place: Offer) => void;
+  onMouseOut?: (place: Offer) => void;
 }
 
 export const OfferCard = ({
   section,
   offer,
   onMouseOver,
+  onMouseOut,
 }: OfferCardProps): JSX.Element => {
   const {id, isPremium, previewImage, isFavorite, price, rating, title, type} = offer;
 
@@ -21,7 +23,7 @@ export const OfferCard = ({
   const sectionStyle = getSectionStyle(section);
 
   return (
-    <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(offer) : undefined}>
+    <article className={`${sectionStyle}__card place-card`} onMouseOver={onMouseOver ? () => onMouseOver(offer) : undefined} onMouseOut={onMouseOut ? () => onMouseOut(offer) : undefined}>
       {
         isPremium ?
           <div className="place-card__mark">

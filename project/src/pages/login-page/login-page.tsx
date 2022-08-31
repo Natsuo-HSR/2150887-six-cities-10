@@ -1,9 +1,11 @@
 import { FormEvent, useRef } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthorizationStatus } from '../../constants/api';
+import { cities } from '../../constants/cities';
 import { AppRoutes } from '../../constants/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
-import { login } from '../../store/api-actions';
+import { fetchOffers, login } from '../../store/api-actions';
+import { setCity } from '../../store/offer-process/offer-process';
 import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
 import { AuthData } from '../../types/types';
 
@@ -14,10 +16,20 @@ export const LoginPage = (): JSX.Element => {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
+  const randomCity = cities[Math.floor(Math.random() * cities.length)];
+
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(login(authData));
+  };
+
+  const handleCityClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    dispatch(setCity(randomCity));
+    dispatch(fetchOffers());
+    navigate(AppRoutes.Index);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -58,9 +70,9 @@ export const LoginPage = (): JSX.Element => {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#todo">
-              <span>Amsterdam</span>
-            </a>
+            <Link className="locations__item-link" to={AppRoutes.Index} onClick={(event) => handleCityClick(event)}>
+              <span>{randomCity.name}</span>
+            </Link>
           </div>
         </section>
       </div>

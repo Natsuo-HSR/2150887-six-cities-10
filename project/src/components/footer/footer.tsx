@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../constants/routes';
+
 export const Footer = (): JSX.Element => (
   <footer className="footer container">
-    <a className="footer__logo-link" href="main.html">
+    <Link className="footer__logo-link" to={AppRoutes.Index}>
       <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-    </a>
+    </Link>
   </footer>
 );
