@@ -35,7 +35,7 @@ export const offerProcess = createSlice({
       .addCase(sortOffers, (state, action) => {
         state.isOffersLoaded = false;
         state.sortType = action.payload;
-        state.offers = getOffers(state.offers, state.city, state.sortType);
+        state.offers = getOffers(state.offers, state.city, action.payload);
         state.isOffersLoaded = true;
       })
       .addCase(fetchOffers.pending, (state) => {

@@ -1,5 +1,6 @@
 import { memo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
+import { fetchOffers } from '../../store/api-actions';
 import { sortOffers } from '../../store/offer-process/offer-process';
 import { getSortType } from '../../store/offer-process/offer-selectors';
 import { SortType } from '../../types/types';
@@ -14,6 +15,7 @@ export const OffersSorting = ({options}: OffersSoringType): JSX.Element => {
   const sortType = useAppSelector(getSortType);
 
   const handleSortChange = (option: SortType) => {
+    dispatch(fetchOffers());
     dispatch(sortOffers(option));
     setIsOpened(false);
   };
