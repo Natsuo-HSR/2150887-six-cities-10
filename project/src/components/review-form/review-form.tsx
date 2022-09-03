@@ -14,7 +14,6 @@ export const ReviewForm = (): JSX.Element => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const isReviewsLoaded = useAppSelector(getIsReviewsLoaded);
 
-  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => setRating(Number(event.target.value));
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setComment(event.target.value);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const ReviewForm = (): JSX.Element => {
         {
           REVIEW_FORM_RATING.map((item) => (
             <Fragment key={item.stars}>
-              <input className="form__rating-input visually-hidden" name="rating" value={item.stars} id={`${item.stars}-stars`} type="radio" disabled={!isReviewsLoaded} onChange={handleRatingChange} />
+              <input className="form__rating-input visually-hidden" name="rating" value={item.stars} id={`${item.stars}-stars`} type="radio" disabled={!isReviewsLoaded} onClick={() => setRating(item.stars)} />
               <label htmlFor={`${item.stars}-stars`} className="reviews__rating-label form__rating-label" title={item.title}>
                 <svg className="form__star-image" width="37" height="33">
                   <use xlinkHref="#icon-star"></use>
