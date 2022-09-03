@@ -1,6 +1,7 @@
 export const MIN_LENGTH_COMMENT = 50;
 export const MAX_LENGTH_COMMENT = 300;
 
+export const MAX_REVIEWS_NUMBER = 10;
 
 export const REVIEW_FORM_RATING = [
   {

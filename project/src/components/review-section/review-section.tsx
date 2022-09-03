@@ -1,4 +1,5 @@
 import { AuthorizationStatus } from '../../constants/api';
+import { MAX_REVIEWS_NUMBER } from '../../constants/reviews';
 import { useAppSelector } from '../../hooks/useAppDispatch';
 import { getIsReviewsLoaded, getReviews } from '../../store/data-process/data-selectors';
 import { getAuthorizationStatus } from '../../store/user-process/user-selectors';
@@ -14,7 +15,7 @@ export const ReviewSection = (): JSX.Element => {
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length > MAX_REVIEWS_NUMBER ? MAX_REVIEWS_NUMBER : reviews.length}</span></h2>
       { isReviewsLoaded ? <ReviewList reviews={reviews} /> : <Spinner /> }
       { authStatus === AuthorizationStatus.Auth ? <ReviewForm /> : undefined }
     </section>
